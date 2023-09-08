@@ -6,19 +6,18 @@ const recipeSchema = new mongoose.Schema({
         required: [true, "Recipe title is required"]
     },
     ingredients: [
+        {ingredient: 
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Ingredients",
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Ingredients"
+        },
+        measure: {
+            type: String,
+        },
+        qty: {
+            type: Number,
         }
-    ],
-    quantity: {
-        type: Number,
-        required: [true, "Quantity is required"]
-    },
-    // measure: {
-    //     type: String,
-    //     required: [true, "Measure is required"]
-    // },
+    }],
     servings: {
         type: Number,
         required: [true, "Servings are required"]

@@ -20,14 +20,13 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
 // 4) Configuring cors in Express instace ('app')
-
-// const corsOptions = {
-//   credentials: true, // Allow credentials (cookies) to be sent to/from origin
-//   origin: 'http://localhost:3000', // Allow only this origin
-//   methods: 'GET, POST, PUT, DELETE', // Allow these methods
-//   // allowedHeaders: 'Content-Type, Authorization', // Allow these headers
-// };
-// app.use(cors(corsOptions));
+const corsOptions = {
+  credentials: true, // Allow credentials (cookies) to be sent to/from origin
+  origin: 'http://localhost:3000', // Allow only this origin
+  methods: 'GET, POST, PUT, DELETE', // Allow these methods
+  // allowedHeaders: 'Content-Type, Authorization', // Allow these headers
+};
+app.use(cors(corsOptions));
 
 // 5) Incorporating cookie-parser middleware to Express instance ('app')
 app.use(cookieParser());
@@ -37,7 +36,11 @@ require("./config/mongoose.config");
 
 // 7) Importing API routes and incorporating them to 'app' instance
 const UserRouter = require("./routes/user_routes");
+const RecipeRouter = require("./routes/recipe_routes");
+const IngredientRouter = require("./routes/ingredients_routes");
 app.use('/api/users', UserRouter);
+app.use('/api/recipe', RecipeRouter);
+app.use('/api/ingredients', IngredientRouter);
 
 // 8) Running instance of Express server in selected port
 app.listen(port, () => console.log(`Listening on port: ${port}`));
