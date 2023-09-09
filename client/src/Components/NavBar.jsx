@@ -40,7 +40,7 @@ const NavBar = (props) => {
             { withCredentials: true }
         );
         localStorage.removeItem("user");
-        setUser(null)
+        //setUser(null)
         navigate("/")
 
         } catch (err) {
@@ -53,21 +53,12 @@ const NavBar = (props) => {
     // --------------------------------------------------
     return (
         <nav className="navbar navbar-dark bg-secondary">
-        <div className="container">
+        <div className="container bg">
             <Link to="/" className="navbar-brand d-flex align-items-center">
             <GiMeal size={50} className="p-1" />
             <h3 className="mx-3 my-0">Food Planner</h3>
             </Link>
             <div className="d-flex ms-auto">
-            {/* Link to CreatePage */}
-            {currentView !== "logRegPage" && currentView !== "addPage" && (
-                <Link
-                to="/pets/new"
-                className="nav-link text-white fs-5 mx-2 text-decoration-underline"
-                >
-                New Pet
-                </Link>
-            )}
             {/* Link to HomePage */}
             {currentView !== "logRegPage" && currentView !== "homePage" && (
                 <Link
