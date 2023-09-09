@@ -27,48 +27,45 @@ module.exports = {
     },
 
   // II) LOGIN
-    login: (req, res) => {
-        UserModel.findOne({ email: req.body.email })
+login: (req, res) => {
+    let data = req.body;
+    
+    if (!Object.keys(data).includes("password")) {
+        return res.status(500).json({ error: "No envió password" });
+    }
+    
+    UserModel.findOne({ email: data["email"] })
         .then((user) => {
-            if (user === null) {
-            res.status(400).json({ message: "Login Error" });
-            } else {
-            bcrypt
-                .compare(req.body.password, user.password)
-                .then((isPasswordValid) => {
-                if (isPasswordValid) {
-
-                    const userInfo = {
-                    _id: user._id,
-                    name: user.name,
-                    last_name: user.last_name,
-                    email: user.email,
-                    };
-                    console.log("userInfo: ", userInfo);
-                    const userToken = jwt.sign(userInfo, process.env.JWT_SECRET);
-
+            if (user) {
+                bcrypt.compare(data["password"], user.password, function (err, result) {
+                    if (result) {
+                        const userInfo = {
+                            _id: user._id,
+                            name: user.first_name,
+                            email: user.email,
+                        };
+                    const token = jwt.sign(userInfo, process.env.SECRET);
+                    
+                    console.log("Secret key:", process.env.SECRET);
                     const cookieOptions = {
-                    httpOnly: true,
-                    expires: new Date(Date.now() + 900000000),
+                        httpOnly: true,
+                        expires: new Date(Date.now() + 900000000),
                     };
-
-                    res
-                    .cookie("usertoken", userToken, cookieOptions)
+                    return res.cookie("token", token, cookieOptions)
                     .status(200)
-                    .json({ message: "Successfully logged in", user: userInfo });
+                    .json({ success: true, user: userInfo });
                 } else {
-                    res.status(400).json({ message: "Login Error" });
+                    res.status(401).json({ error: "Email and password combination doesn't match" });
                 }
-                })
-                .catch((err) => {
-                res.status(400).json({ message: "Login Error" });
-                });
-            }
-        })
-        .catch((err) => {
-            res.status(400).json({ message: "Login Error" });
-        });
-    },
+            });
+        } else {
+            res.status(404).json({ error: "Combinación email y clave no existen" });
+        }
+    })
+    .catch((error) => {
+        res.status(500).json({ error });
+    });
+},
 
 // III) LOGOUT
     logout: (req, res) => {

@@ -1,12 +1,6 @@
 const express = require("express");
 
-const {
-    findAllRecipes,
-    findOneRecipeById,
-    createNewRecipe,
-    updateOneRecipeById,
-    deleteOneRecipeById
-} = require("../controllers/recipe_controller");
+const {findAllRecipes, findOneRecipeById, createNewRecipe, updateOneRecipeById, deleteOneRecipeById } = require("../controllers/recipe_controller");
 
 const RecipeRouter = express.Router();
 
