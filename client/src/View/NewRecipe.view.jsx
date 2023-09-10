@@ -7,8 +7,7 @@ const RecipesUploadView = () => {
     <div>
         <NavBar/>
         <RecipeForm />
-
-        </div>
+    </div>
     );
 };
 
