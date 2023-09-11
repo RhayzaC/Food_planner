@@ -5,8 +5,6 @@ import { useNavigate} from 'react-router-dom';
 import Autocomplete from '@mui/joy/Autocomplete';
 import { Delete } from '@mui/icons-material'; // Importa el icono "Delete" de Material Icons
 
-//import Input from '@mui/joy/Input';
-
 
 function RecipeForm() {
     const [recipeData, setRecipeData] = useState({
@@ -56,7 +54,6 @@ function RecipeForm() {
         e.preventDefault();
 
         try {
-        // Envía los datos al servidor para subir la receta
         const response = await axios.post('http://localhost:8000/api/recipe/', recipeData);
             console.log('Receta subida con éxito:', response.data);
                 navigate(`/`);
@@ -126,7 +123,7 @@ function RecipeForm() {
                         >
                         Add Ingredient
                     </Button>
-                    {/*Ingredients map*/}
+                {/*Ingredients map*/}
                     <ul className='text-light'>
                         {ingredientsList.map((ingredient, index) => (
                             <li key={index}>
@@ -186,10 +183,10 @@ function RecipeForm() {
                     required
                 >
                     <option value=""> Select a Category </option>
-                        <option value="Appetizers">Breakfast</option>
-                        <option value="Main Course">Lunch</option>
-                        <option value="Chicken">Dinner</option>
-                        <option value="Chicken">Snacks</option>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
+                        <option value="Snacks">Snacks</option>
                 </select>
             </div>
             <button className="mt-3 px-4 btn btn-ml btn-success mx-auto" type="submit">
