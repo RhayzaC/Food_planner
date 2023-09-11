@@ -11,5 +11,4 @@ const RecipesUploadView = () => {
     </div>
     );
 };
-
 export default RecipesUploadView;

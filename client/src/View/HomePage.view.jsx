@@ -32,5 +32,4 @@ const LogRegPage = (props) => {
       </div>
     )
 }
-
 export default LogRegPage
