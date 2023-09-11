@@ -69,7 +69,7 @@ const UserForm = ({ formType, setUser }) => {
 
         setUser(res.data.user);
         localStorage.setItem("user", JSON.stringify(res.data.user));
-        navigate("/");
+        navigate("/recipe/");
         } catch (err) {
         console.log("Error: ", err.response.data);
         updateErrorMessages(err);
