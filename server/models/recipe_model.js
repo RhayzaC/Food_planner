@@ -5,8 +5,8 @@ const recipeSchema = new mongoose.Schema({
         type: String,
         required: [true, "Recipe title is required"]
     },
-    ingredients: [
-        {ingredient: 
+    ingredients: [{
+        ingredient: 
         {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Ingredients"

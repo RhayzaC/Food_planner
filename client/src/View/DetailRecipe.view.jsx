@@ -48,12 +48,11 @@ const RecipeDetailView = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {recipe.map &&
-                                recipe.map((item, idx) => (
+                            {recipe.ingredients && recipe.ingredients.map((item, idx) => (
                                 <tr key={idx}>
-                                    <td>{item.ingredients?.name}</td>
-                                    <td>{item.ingredients?.qty}</td>
-                                    <td>{item.ingredients?.measure} </td>
+                                    <td>{item.qty}</td>
+                                    <td>{item.measure} </td>
+                                    <td>{item._id}</td>
                                 </tr>
                                 ))}
                         </tbody>
@@ -61,6 +60,8 @@ const RecipeDetailView = () => {
                 </div>
                 <img src={recipe.photo} alt="Dish photo"></img>
         </div>
+        <hr/>
+        <h5 className="text-left">Instructions: </h5>
         <div>{recipe.instructions}</div>
     </div>
     );
