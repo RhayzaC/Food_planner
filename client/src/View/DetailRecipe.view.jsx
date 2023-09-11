@@ -15,29 +15,50 @@ const RecipeDetailView = () => {
             .catch((error) => {
                 console.log(error);
             });
+        console.log(recipe)
     }
 
-    const editRecipe = (prop, value) => {
-        axios.put(`http://localhost:8000/api/recipe/${id}`, {[prop]: value}, {withCredentials: true})
-            .then((response) => {
-                setRecipe({
-                    ...recipe,
-                    [prop]: value
-                })
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    }
+    // const editRecipe = (prop, value) => {
+    //     axios.put(`http://localhost:8000/api/recipe/${id}`, {[prop]: value}, {withCredentials: true})
+    //         .then((response) => {
+    //             setRecipe({
+    //                 ...recipe,
+    //                 [prop]: value
+    //             })
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         })
+    // }
 
     useEffect(getOneRecipe, [id])
 
     return (
     <div>
         <NavBar/>
-        <h1 className="">{recipe.title}</h1>
+        <h2 className="m-3">{recipe.title}</h2>
         <div className="d-flex justify-content-around">
-                <div>INGREDIENTES</div>
+                <div>
+                    <table className="table table-striped">
+                        <thead className="table-secondary">
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Qty</th>
+                                <th scope="col">Measure</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {recipe.map &&
+                                recipe.map((item, idx) => (
+                                <tr key={idx}>
+                                    <td>{item.ingredients?.name}</td>
+                                    <td>{item.ingredients?.qty}</td>
+                                    <td>{item.ingredients?.measure} </td>
+                                </tr>
+                                ))}
+                        </tbody>
+                    </table>
+                </div>
                 <img src={recipe.photo} alt="Dish photo"></img>
         </div>
         <div>{recipe.instructions}</div>
