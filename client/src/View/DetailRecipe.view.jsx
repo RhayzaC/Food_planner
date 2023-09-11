@@ -37,7 +37,7 @@ const RecipeDetailView = () => {
         <NavBar/>
         <h1 className="">{recipe.title}</h1>
         <div className="d-flex justify-content-around">
-                <div>INGREDIENTES</div>
+                <div>INGREDIENTS</div>
                 <img src={recipe.photo} alt="Dish photo"></img>
         </div>
         <div>{recipe.instructions}</div>

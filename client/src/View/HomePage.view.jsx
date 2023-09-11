@@ -16,19 +16,20 @@ const LogRegPage = (props) => {
   // II) JSX
   // --------------------------------------------------
     return (
-        <div className="container mt-5">
+      
+        <div className="container" style={{ minHeight: "100vh" }} >
             <NavBar/>
-        <hr/>
+            <hr/>
         <div className = "row">
-            <div className = "col">
-            <UserRegister formType={"register"} setUser={setUser} />
-            </div>
-            <div className = "col">
-            <UserRegister formType={"login"} setUser={setUser} />
+          <div className="col-md-6 mb-3 text-info"> 
+              <UserRegister formType={"register"} setUser={setUser} />
+          </div>
+            <div className = "col md-6mb-3 text-info">
+              <UserRegister formType={"login"} setUser={setUser} />
             </div>
         </div>
-        <hr/>
-        </div>
+          <hr/>
+      </div>
     )
 }
 

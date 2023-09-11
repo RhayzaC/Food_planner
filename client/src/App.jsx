@@ -5,6 +5,9 @@ import HomePage from './View/HomePage.view';
 import NewRecipe from './View/NewRecipe.view';
 import DetailRecipe from './View/DetailRecipe.view';
 
+import './styles.css'; // Asegúrate de que la ruta sea correcta
+
+
 //import ProtectedRoute from './Components/ProtectedRoutes.component';
 import "bootswatch/dist/minty/bootstrap.min.css";
 

@@ -6,6 +6,7 @@ const RecipesUploadView = () => {
     return (
     <div>
         <NavBar/>
+        <hr/>
         <RecipeForm />
     </div>
     );

@@ -88,11 +88,12 @@ const UserForm = ({ formType, setUser }) => {
     };
 
     return (
-        <div className="py-3">
-        <h3 className="text-center">
+        <div className="d-flex bg-primary align-items-center min-vh-200 rounded">
+        <div className="py-3 m-2 ">
+        <h3 className="text-center text-black text-decoration-underline">
             {formType === "register" ? <span>Register</span> : <span>Login</span>}
         </h3>
-        <form onSubmit={handleOnSubmitRegistration} className="my-3">
+        <form onSubmit={handleOnSubmitRegistration} className="m-4 text-black">
             {/* Form Fields */}
             {formType === "register" && (
             <>
@@ -111,22 +112,23 @@ const UserForm = ({ formType, setUser }) => {
             <div className="text-center">
             <button
                 type="submit"
-                className="mt-2 px-4 btn btn-sm btn-primary"
+                className="mt-2 px-4 btn btn-m btn-secondary mx-auto"
             >
                 {formType === "register" ? <span>Register</span> : <span>Login</span>}
             </button>
             </div>
         </form>
         </div>
+        </div>
     );
 
     function renderInput(name, label, placeholder) {
         return (
-        <div className="mb-2 row text-end" key={name}>
+        <div className="mb-3 row text-center" key={name}>
             <label htmlFor={name} className="col-sm-3 col-form-label">
             {label}:
             </label>
-            <div className="col-sm-7">
+            <div className="col-sm-8">
             <input
                 type={name === "password" || name === "confirmPassword" ? "password" : "text"}
                 id={name}

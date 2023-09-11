@@ -52,11 +52,11 @@ const NavBar = (props) => {
     // III) JSX
     // --------------------------------------------------
     return (
-        <nav className="navbar navbar-dark bg-secondary">
-        <div className="container bg">
+        <nav className="navbar navbar-dark bg-secondary rounded">
+        <div className="container-fluid">
             <Link to="/" className="navbar-brand d-flex align-items-center">
             <GiMeal size={50} className="p-1" />
-            <h3 className="mx-3 my-0">Food Planner</h3>
+            <h2 className="mx-3 my-0 text-dark">Food Planner</h2>
             </Link>
             <div className="d-flex ms-auto">
             {/* Link to HomePage */}
