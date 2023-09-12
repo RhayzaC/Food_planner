@@ -52,7 +52,7 @@ const RecipeDetailView = () => {
                                 <tr key={idx}>
                                     <td>{item.qty}</td>
                                     <td>{item.measure} </td>
-                                    <td>{item._id}</td>
+                                    <td>{item.ingredient.name}</td>
                                 </tr>
                                 ))}
                         </tbody>
