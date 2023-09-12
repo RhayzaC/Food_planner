@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "bootswatch/dist/minty/bootstrap.min.css";
 
 
-function SuggestionForm() {
+function WeeklyForm() {
   // Estado para almacenar las selecciones del usuario
   const [mealType, setMealType] = useState(''); // Opciones: 'Healthy', 'Regular', 'Vegetarian'
 
@@ -43,4 +43,4 @@ function SuggestionForm() {
     );
 }
 
-export default SuggestionForm;
+export default WeeklyForm;

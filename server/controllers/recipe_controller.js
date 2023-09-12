@@ -6,7 +6,7 @@ const RecipeModel = require("../models/recipe_model");
 module.exports = {
     findAllRecipes: (req, res) => {
         RecipeModel.find({})
-        .populate("ingredient")
+        .populate("ingredients.ingredient")
         .then((allRecipes) => res.status(200).json(allRecipes))
         .catch((err) =>
             res.status(500).json({ message: "Something went wrong", error: err })
@@ -19,7 +19,7 @@ module.exports = {
             .status(400)
             .json({ message: "UUID doesn't match the specified format" });
         RecipeModel.findOne({ _id: req.params.id })
-        .populate("ingredient")
+        .populate("ingredients.ingredient")
         .then((oneSingleRecipe) => {
             console.log("single recipe is", oneSingleRecipe)
             if (oneSingleRecipe) {
