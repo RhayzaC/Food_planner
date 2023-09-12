@@ -6,20 +6,22 @@ const RecipeModel = require("../models/recipe_model");
 module.exports = {
     findAllRecipes: (req, res) => {
         RecipeModel.find({})
-        .populate("ingredients")
+        .populate("ingredient")
         .then((allRecipes) => res.status(200).json(allRecipes))
         .catch((err) =>
             res.status(500).json({ message: "Something went wrong", error: err })
         );
     },
+    
     findOneRecipeById: (req, res) => {
         if (!ObjectId.isValid(req.params.id))
         return res
             .status(400)
             .json({ message: "UUID doesn't match the specified format" });
         RecipeModel.findOne({ _id: req.params.id })
-        .populate("ingredients")
+        .populate("ingredient")
         .then((oneSingleRecipe) => {
+            console.log("single recipe is", oneSingleRecipe)
             if (oneSingleRecipe) {
             res.status(200).json(oneSingleRecipe);
             } else {
@@ -33,7 +35,7 @@ module.exports = {
 
     createNewRecipe: (req, res) => {
         RecipeModel.create(req.body)
-        .then((newRecipe) => RecipeModel.findOne({ _id: newRecipe._id }).populate("ingredients"))
+        .then((newRecipe) => RecipeModel.findOne({ _id: newRecipe._id }).populate("ingredient"))
         .then((newRecipePopulated) => res.status(201).json(newRecipePopulated))
         .catch((err) => {
             if (err.name === "ValidationError") {
@@ -50,28 +52,28 @@ module.exports = {
         return res
             .status(400)
             .json({ message: "UUID doesn't match the specified format" });
-
-        const updateOptions = {
-        new: true, 
-        runValidators: true,
+            const updateOptions = {
+                new: true, 
+                runValidators: true,
         };
 
-        RecipeModel.findOneAndUpdate({ _id: req.params.id }, req.body, updateOptions).populate("ingredients")
-        .then((updatedRecipe) => {
-            if (updatedRecipe) {
-            res.status(200).json(updatedRecipe);
-            } else {
-            res.status(404).json({ message: "Recipe not found" });
-            }
-        })
-        .catch((err) => {
-            if (err.name === "ValidationError") {
-            return res
-                .status(400)
-                .json({ message: "Validation Errors", errors: err });
-            }
-            res.status(500).json({ message: "Something went wrong", errors: err });
-        });
+        RecipeModel.findOneAndUpdate({ _id: req.params.id }, req.body, updateOptions)
+            .populate("ingredient")
+            .then((updatedRecipe) => {
+                if (updatedRecipe) {
+                res.status(200).json(updatedRecipe);
+                } else {
+                res.status(404).json({ message: "Recipe not found" });
+                }
+            })
+            .catch((err) => {
+                if (err.name === "ValidationError") {
+                return res
+                    .status(400)
+                    .json({ message: "Validation Errors", errors: err });
+                }
+                res.status(500).json({ message: "Something went wrong", errors: err });
+            });
     },
     
     deleteOneRecipeById: (req, res) => {
@@ -91,4 +93,4 @@ module.exports = {
             res.status(500).json({ message: "Something went wrong", error: err })
         );
     },
-    };
+};

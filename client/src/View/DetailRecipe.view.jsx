@@ -36,15 +36,15 @@ const RecipeDetailView = () => {
     return (
     <div>
         <NavBar/>
-        <h2 className="m-3">{recipe.title}</h2>
+        <h2 className="m-3 text-black mt-4 mb-4">{recipe.title}</h2>
         <div className="d-flex justify-content-around">
                 <div>
-                    <table className="table table-striped">
+                    <table className="table table-striped m-4">
                         <thead className="table-secondary">
-                            <tr>
-                                <th scope="col">Name</th>
+                            <tr >
                                 <th scope="col">Qty</th>
                                 <th scope="col">Measure</th>
+                                <th scope="col">Name</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,7 +58,14 @@ const RecipeDetailView = () => {
                         </tbody>
                     </table>
                 </div>
-                <img src={recipe.photo} alt="Dish photo"></img>
+                <div className="text-center">
+                    <img
+                        src={recipe.photo}
+                        alt="Dish photo"
+                        className="img-fluid m-3" 
+                        style={{ maxWidth: '500px', maxHeight: '500px' }}
+                    />
+                </div>
         </div>
         <hr/>
         <h5 className="text-left">Instructions: </h5>
