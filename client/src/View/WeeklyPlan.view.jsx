@@ -1,36 +1,50 @@
-import React from 'react';
+import React , {useState} from 'react';
+import { Link } from "react-router-dom";
+import { Button } from 'react-bootstrap';
+
 import NavBar from '../Components/NavBar';
-import WeeklyForm from '../Components/WeeklyForm.component';
 import FoodCard from '../Components/FoodCard.component';
-import FoodCardPrueba from '../Components/pruebaFoodCard.component';
+
 
 const RecipesUploadView = () => {
+    const [selectedMealType, setSelectedMealType] = useState('Regular');
+
+    const handleMealTypeChange = (event) => {
+        setSelectedMealType(event.target.value);
+    };
+
     return (
-    
     <div className="container-fluid">
-    
         <NavBar/>
     <hr/>
-        <WeeklyForm/>
-        {/* <div className="d-flex">
-            <FoodCard dayName="Monday"/>
-            <FoodCard dayName="Tuesday"/>
-            <FoodCard dayName="Wednesday"/>
-            <FoodCard dayName="Thursday"/>
-            <FoodCard dayName="Friday"/>
-            <FoodCard dayName="Saturday"/>
-            <FoodCard dayName="Sunday"/>
-        </div> */}
-        <div className="d-flex">
-            <FoodCardPrueba dayName="Monday"/>
-            <FoodCardPrueba dayName="Tuesday"/>
-            <FoodCardPrueba dayName="Wednesday"/>
-            <FoodCardPrueba dayName="Thursday"/>
-            <FoodCardPrueba dayName="Friday"/>
-            <FoodCardPrueba dayName="Saturday"/>
-            <FoodCardPrueba dayName="Sunday"/>
+    <div>
+        <h1>Meal Planner</h1>
+        <div>
+            <label>
+            Select Meal Type:
+            <select value={selectedMealType} onChange={handleMealTypeChange}>
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Healthy">Healthy</option>
+                <option value="Regular">Regular</option>
+            </select>
+            </label>
         </div>
-
+        <div className="d-flex">
+            <FoodCard dayName="Monday" mealType={selectedMealType}/>
+            <FoodCard dayName="Tuesday" mealType={selectedMealType}/>
+            <FoodCard dayName="Wednesday" mealType={selectedMealType}/>
+            <FoodCard dayName="Thursday" mealType={selectedMealType}/>
+            <FoodCard dayName="Friday" mealType={selectedMealType}/>
+            <FoodCard dayName="Saturday" mealType={selectedMealType}/>
+            <FoodCard dayName="Sunday" mealType={selectedMealType}/>
+        </div>
+        <div className="text-center">
+            <Link type="submit"
+                className="mt-2 px-4 btn btn-m btn-secondary mx-auto"
+                to={"/recipe/shoplist/"}>See shopping list
+            </Link>
+        </div>
+    </div>
     </div>
     );
 };

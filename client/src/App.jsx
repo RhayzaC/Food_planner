@@ -5,6 +5,7 @@ import HomePage from './View/HomePage.view';
 import NewRecipe from './View/NewRecipe.view';
 import DetailRecipe from './View/DetailRecipe.view';
 import WeeklyPlan from './View/WeeklyPlan.view';
+import ShopList from './View/ShopList.view';
 
 
 import './styles.css'; // Asegúrate de que la ruta sea correcta
@@ -23,6 +24,7 @@ function App() {
         <Route index={true} path="/recipe/new/" element={<NewRecipe setUser={setUser} />} />
         <Route index={true} path="/recipe/:id/" element={<DetailRecipe setUser={setUser} />} />
         <Route index={true} path="/recipe/" element={<WeeklyPlan setUser={setUser} />} />
+        <Route index={true} path="/recipe/shoplist" element={<ShopList setUser={setUser} />} />
 
         {/*<Route path="/pirate/new/" element={<ProtectedRoute user={user} redirected={"/"}> <PirateCreateView /> </ProtectedRoute>} />
         <Route path="/pirate/:id" element={<ProtectedRoute user={user} redirected={"/"}> <PirateDetailView /> </ProtectedRoute>} />*/}
