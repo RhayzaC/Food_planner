@@ -63,7 +63,7 @@ const NavBar = (props) => {
             {/* Link to HomePage */}
             {currentView !== "logRegPage" && currentView !== "homePage" && (
                 <Link
-                to="/"
+                to="/recipe/"
                 className="nav-link text-white fs-5 mx-2 text-decoration-underline"
                 >
                 Home

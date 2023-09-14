@@ -19,19 +19,6 @@ const RecipeDetailView = () => {
         console.log(recipe)
     }
 
-    // const editRecipe = (prop, value) => {
-    //     axios.put(`http://localhost:8000/api/recipe/${id}`, {[prop]: value}, {withCredentials: true})
-    //         .then((response) => {
-    //             setRecipe({
-    //                 ...recipe,
-    //                 [prop]: value
-    //             })
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         })
-    // }
-
     useEffect(getOneRecipe, [id])
 
     return (
