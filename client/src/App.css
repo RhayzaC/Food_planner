@@ -40,3 +40,11 @@
 .read-the-docs {
   color: #888;
 }
+
+
+.custom-footer {
+  width: '100%';  
+  padding: 20px;
+  margin-top: 50px;
+  text-align: center;
+}

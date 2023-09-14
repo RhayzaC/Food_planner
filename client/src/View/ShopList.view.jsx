@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import Layout from '../Templates/Layout.templates';
 
 const ShopList = () => {
     // --------------------------------------------------
@@ -25,7 +26,9 @@ const ShopList = () => {
 
 
     return (
+        <Layout>
         <div>ShopList</div>
+        </Layout>
     )
 }
 

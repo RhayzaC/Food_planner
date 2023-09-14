@@ -52,11 +52,12 @@ const NavBar = (props) => {
     // III) JSX
     // --------------------------------------------------
     return (
-        <nav className="navbar navbar-dark bg-secondary rounded">
-        <div className="container-fluid">
-            <Link to="/" className="navbar-brand d-flex align-items-center">
-            <GiMeal size={50} className="p-1" />
-            <h2 className="mx-3 my-0 text-dark">Food Planner</h2>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top">
+        <Link to="/" className="navbar-brand d-flex align-items-center">
+            <div className="mx-3"> 
+                <GiMeal size={50} className= "p-1 mb-1 " />
+            </div>
+            <h2 className="mx-3 my-0 text-black">Food Planner</h2>
             </Link>
             <div className="d-flex ms-auto">
             {/* Link to HomePage */}
@@ -69,17 +70,17 @@ const NavBar = (props) => {
                 </Link>
             )}
             {/* Button for Logout */}
-            {currentView !== "logRegPage" && (
+            {currentView !== "logRegPage" && currentView !== "homePage" && (
                 <button
-                className="btn nav-link text-white fs-5 mx-2 text-decoration-underline shadow-none"
+                className="btn nav-link text-white fs-5 mx-2 px-5 text-decoration-underline shadow-none"
                 onClick={handleLogout}
                 >
                 Logout
                 </button>
             )}
             </div>
-        </div>
         </nav>
+
     );
 };
 

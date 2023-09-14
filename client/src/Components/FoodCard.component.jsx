@@ -41,11 +41,11 @@ const FoodCardPrueba2 = (props) => {
         });
 
         return (
-        <div>
+        <div >
             <p>{category}</p>
             {filteredByMealType.map((item, idx) => (
             <div key={idx}>
-                <label>{item.title}</label>
+                <label >{item.title}</label>
             </div>
             ))}
         </div>
@@ -53,14 +53,18 @@ const FoodCardPrueba2 = (props) => {
     };
 
     return (
-        <Card>
-        <Card.Title className="font-weight-bold text-center mb-4" style={{ color: '#000' }}>
+        <Card className='' style={{ font:'bold', width: '300px' }}>
+        <Card.Title className="font-weight-bold text-center m-0 p-0 " style={{ color: '#000' }}>
             {props.dayName}
         </Card.Title>
-        <Card.Body>
+        <Card.Body className='text-center '>
+    
             {renderRecipes('Breakfast')}
+            <hr/>
             {renderRecipes('Lunch')}
+            <hr/>
             {renderRecipes('Dinner')}
+            <hr/>
             {renderRecipes('Snacks')}
         </Card.Body>
         </Card>

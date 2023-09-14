@@ -1,14 +1,15 @@
 import React from 'react';
 import RecipeForm from '../Components/NewRecipe.component';
-import NavBar from '../Components/NavBar';
+import Layout from '../Templates/Layout.templates';
 
 const RecipesUploadView = () => {
     return (
+        <Layout>
     <div>
-        <NavBar/>
         <hr/>
         <RecipeForm />
     </div>
+    </Layout>
     );
 };
 export default RecipesUploadView;

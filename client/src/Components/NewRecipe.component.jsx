@@ -63,7 +63,7 @@ function RecipeForm() {
     };
 
     return (
-        <div style={{ borderRadius: "5px", backgroundColor: "grey", minHeight: "100vh", padding: "30px" }}>
+        <div style={{ margin: "20px", marginTop:"50px", borderRadius: "10px", backgroundColor: "grey", padding: "30px" }}>
         <Container>
             <h2 className='text-success text-decoration-underline mb-4'>Upload a Recipe</h2>
             <form onSubmit={handleSubmit}>

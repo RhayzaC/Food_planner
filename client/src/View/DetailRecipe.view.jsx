@@ -1,7 +1,8 @@
-import NavBar from '../Components/NavBar';
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
+import Layout from '../Templates/Layout.templates';
+
 
 const RecipeDetailView = () => {
     const [recipe, setRecipe] = useState({});
@@ -34,8 +35,8 @@ const RecipeDetailView = () => {
     useEffect(getOneRecipe, [id])
 
     return (
+    <Layout>
     <div>
-        <NavBar/>
         <h2 className="m-3 text-black mt-4 mb-4">{recipe.title}</h2>
         <div className="d-flex justify-content-around">
                 <div>
@@ -71,6 +72,7 @@ const RecipeDetailView = () => {
         <h5 className="text-left">Instructions: </h5>
         <div>{recipe.instructions}</div>
     </div>
+    </Layout>
     );
 };
 
