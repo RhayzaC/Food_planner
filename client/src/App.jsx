@@ -1,15 +1,13 @@
 import './App.css';
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import HomePage from './View/HomePage.view';
 import NewRecipe from './View/NewRecipe.view';
 import DetailRecipe from './View/DetailRecipe.view';
 import WeeklyPlan from './View/WeeklyPlan.view';
 import ShopList from './View/ShopList.view';
 
-
 import './styles.css'; // Asegúrate de que la ruta sea correcta
-
 
 //import ProtectedRoute from './Components/ProtectedRoutes.component';
 import "bootswatch/dist/minty/bootstrap.min.css";

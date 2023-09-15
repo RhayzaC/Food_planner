@@ -58,7 +58,6 @@ const FoodCardPrueba2 = (props) => {
             {props.dayName}
         </Card.Title>
         <Card.Body className='text-center '>
-    
             {renderRecipes('Breakfast')}
             <hr/>
             {renderRecipes('Lunch')}

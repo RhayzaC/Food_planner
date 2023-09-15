@@ -64,7 +64,11 @@ const NavBar = (props) => {
             {currentView !== "logRegPage" && currentView !== "homePage" && (
                 <Link
                 to="/recipe/"
+<<<<<<< HEAD
                 className="nav-link text-white fs-5 text-decoration-underline"
+=======
+                className="nav-link text-white fs-5 mx-2 text-decoration-underline"
+>>>>>>> b1d24569b2b11691ff7e8c86ceade416dd44c88b
                 >
                 Home
                 </Link>
