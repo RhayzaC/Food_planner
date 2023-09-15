@@ -30,7 +30,6 @@ const RecipesUploadView = () => {
                     </select>
                 </label>
             </div>
-<<<<<<< HEAD
             <div className= 'd-flex text-black' style={{ backgroundColor:'lightpink', width:'1325px' }}>
                 <FoodCard dayName="Monday" mealType={selectedMealType} />
                 <FoodCard dayName="Tuesday" mealType={selectedMealType} />
@@ -39,16 +38,6 @@ const RecipesUploadView = () => {
                 <FoodCard dayName="Friday" mealType={selectedMealType} />
                 <FoodCard dayName="Saturday" mealType={selectedMealType} />
                 <FoodCard dayName="Sunday" mealType={selectedMealType} />
-=======
-            <div className= 'd-flex justify-content-center text-black ' style={{ width: '1250px' }}>
-                <FoodCard dayName="Monday" mealType={selectedMealType} recipes={weeklyRecipes["Monday"]}/>
-                <FoodCard dayName="Tuesday" mealType={selectedMealType} recipes={weeklyRecipes["Tuesday"]}/>
-                <FoodCard dayName="Wednesday" mealType={selectedMealType} recipes={weeklyRecipes["Wednesday"]}/>
-                <FoodCard dayName="Thursday" mealType={selectedMealType} recipes={weeklyRecipes["Thursday"]}/>
-                <FoodCard dayName="Friday" mealType={selectedMealType} recipes={weeklyRecipes["Friday"]}/>
-                <FoodCard dayName="Saturday" mealType={selectedMealType} recipes={weeklyRecipes["Saturday"]}/>
-                <FoodCard dayName="Sunday" mealType={selectedMealType} recipes={weeklyRecipes["Sunday"]}/>
->>>>>>> b1d24569b2b11691ff7e8c86ceade416dd44c88b
             </div>
             <div class="d-flex text-center">
                 <Link
