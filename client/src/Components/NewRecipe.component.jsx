@@ -16,9 +16,9 @@ function RecipeForm() {
         instructions: '',
         photo: '',
         category: '',
-        // vegetarian: '',
-        // healthy: '',
-        // regular: '',
+        //vegetarian: '',
+        //healthy: '',
+        //regular: '',
     });
 
     const navigate = useNavigate();
@@ -30,9 +30,13 @@ function RecipeForm() {
     const [currentMeasure, setCurrentMeasure] = useState('');
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setRecipeData({ ...recipeData, [name]: value });
-    };
+        const { name, value, type, checked } = e.target;
+        //if (type === 'checkbox') {
+            //setRecipeData({ ...recipeData, [name]: checked });
+            //} else {
+            setRecipeData({ ...recipeData, [name]: value });
+            }
+    
 
     const handleAddIngredient = () => {
         const newIngredient = {
@@ -52,26 +56,13 @@ function RecipeForm() {
         // Actualiza el estado de la lista de ingredientes.
         setIngredientsList(newIngredientsList);
     };
+    
+//Probando Edicion Código//
+    const [allIngredients, setAllIngredients] = useState([]);
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-
-    //     try {
-    //     const response = await axios.post('http://localhost:8000/api/recipe/', recipeData);
-    //     console.log('Receta subida con éxito:', response.data);
-    //     navigate(`/`);
-    //     } catch (error) {
-    //     console.error('Error al subir la receta:', error);
-    //     }
-    // };
-
-// --------------------------------------------------------------
-    // DESDE ACA, PRUEBA EDICION DE CODIGO PARA QUE FUNCIONE EL FORM
     useEffect(() => {
             getAllIngredients();
         }, []);
-
-        const [allIngredients, setAllIngredients] = useState({});
 
         const getAllIngredients = async () => {
             try {
@@ -82,7 +73,7 @@ function RecipeForm() {
                 } catch (err) {
                 console.log(err);
                 }
-            };
+            }; 
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -93,7 +84,8 @@ function RecipeForm() {
         try {
         let res = await axios.post("http://localhost:8000/api/recipe", recipeData, {
             withCredentials: true,
-        });
+        });         
+            navigate("/recipe/");
         } catch (err) {
         console.log(err);
         }
@@ -126,19 +118,7 @@ function RecipeForm() {
                         onChange={(event, newValue) => {
                             setCurrentIngredient(newValue);
                         }}
-                        options={['Ingredient 1', 'Ingredient 2', 'Ingredient 3']}
-
-                        // options={
-                        //     allIngredients &&
-                        //     allIngredients.map((item, idx) => (
-                        //         <div key={idx}>
-                        //             <label>{item.name}</label>
-                        //         </div>
-                        //     ))
-                        // }
-
-                        // options={allIngredients.name}
-
+                        options={allIngredients.map((ingredient) => ingredient.name)}
                         renderInput={(params) => <TextField {...params} variant='outlined' />}
                         />
                 </div>
@@ -162,7 +142,7 @@ function RecipeForm() {
                         onChange={(event, newValue) => {
                             setCurrentMeasure(newValue);
                         }}
-                        options={['Measure 1', 'Measure 2', 'Measure 3']}
+                        options={['cup','cups','gram','grams','spoon','spoons','teaspoon', 'teaspoons']}
                         renderInput={(params) => <TextField {...params} variant='outlined' />}
                         />
                 </div>
@@ -231,6 +211,7 @@ function RecipeForm() {
             </form>
             </div>
         <div  className='my-5 m-5' style={{ flex: 1 }}>
+        
         {/* Columna de la lista de ingredientes */}
         <Accordion>
             <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='ingredient-list-content' id='ingredient-list-header'>

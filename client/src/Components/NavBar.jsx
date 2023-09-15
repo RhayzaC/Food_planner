@@ -52,6 +52,7 @@ const NavBar = (props) => {
     // III) JSX
     // --------------------------------------------------
     return (
+        <div >
         <nav className="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top">
         <Link to="/" className="navbar-brand d-flex align-items-center">
             <div className="mx-3"> 
@@ -80,6 +81,7 @@ const NavBar = (props) => {
             )}
             </div>
         </nav>
+        </div>
 
     );
 };

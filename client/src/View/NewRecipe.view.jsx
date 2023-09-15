@@ -5,8 +5,8 @@ import Layout from '../Templates/Layout.templates';
 const RecipesUploadView = () => {
     return (
         <Layout>
-            <div>
-                <hr/>
+            <div className="container mt-5">
+                    <br/>
                 <RecipeForm />
             </div>
         </Layout>
