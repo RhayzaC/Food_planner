@@ -6,9 +6,7 @@ const RecipeModel = require("../models/recipe_model");
 module.exports = {
     findAllRecipes: (req, res) => {
         RecipeModel.find({})
-        .populate(
-            "ingredients.ingredient"
-        )
+        .populate("ingredients.ingredient")
         .then((allRecipes) => res.status(200).json(allRecipes))
         .catch((err) =>
             res.status(500).json({ message: "Something went wrong", error: err })
@@ -60,7 +58,6 @@ module.exports = {
         };
 
         RecipeModel.findOneAndUpdate({ _id: req.params.id }, req.body, updateOptions)
-            .populate("ingredient")
             .then((updatedRecipe) => {
                 if (updatedRecipe) {
                 res.status(200).json(updatedRecipe);

@@ -31,6 +31,7 @@ const RecipesUploadView = () => {
                 </label>
             </div>
             <div className= 'd-flex text-black' style={{ backgroundColor:'lightpink', width:'1325px' }}>
+                <hr/>
                 <FoodCard dayName="Monday" mealType={selectedMealType} />
                 <FoodCard dayName="Tuesday" mealType={selectedMealType} />
                 <FoodCard dayName="Wednesday" mealType={selectedMealType} />
@@ -39,18 +40,18 @@ const RecipesUploadView = () => {
                 <FoodCard dayName="Saturday" mealType={selectedMealType} />
                 <FoodCard dayName="Sunday" mealType={selectedMealType} />
             </div>
-            <div class="d-flex text-center">
+            <div className="d-flex text-center">
                 <Link
                 type="submit"
-                class="mt-4 px-4 btn btn-m btn-info outline mx-2"
+                className="mt-4 px-4 btn btn-m btn-info outline mx-2"
                 to={"/recipe/new/"}
                 >
                 Create Your Recipe
                 </Link>
-            <div class="d-flex text-center">
+            <div className="d-flex text-center">
                 <Link
                 type="submit"
-                class="mt-4 px-4 btn btn-m btn-primary mx-2"
+                className="mt-4 px-4 btn btn-m btn-primary mx-2"
                 to={"/recipe/shoplist/"}
                 >
                 See shopping list

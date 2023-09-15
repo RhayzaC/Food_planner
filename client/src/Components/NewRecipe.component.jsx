@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, TextField, Button, Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -9,13 +9,16 @@ import { Delete } from '@mui/icons-material'; // Importa el icono "Delete" de Ma
 function RecipeForm() {
     const [recipeData, setRecipeData] = useState({
         title: '',
-        ingredients: '',
+        ingredients: {},
         measure: '',
         qty: '',
         servings: '',
         instructions: '',
         photo: '',
         category: '',
+        // vegetarian: '',
+        // healthy: '',
+        // regular: '',
     });
 
     const navigate = useNavigate();
@@ -50,18 +53,51 @@ function RecipeForm() {
         setIngredientsList(newIngredientsList);
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
 
-        try {
-        const response = await axios.post('http://localhost:8000/api/recipe/', recipeData);
-        console.log('Receta subida con éxito:', response.data);
-        navigate(`/`);
-        } catch (error) {
-        console.error('Error al subir la receta:', error);
-        }
+    //     try {
+    //     const response = await axios.post('http://localhost:8000/api/recipe/', recipeData);
+    //     console.log('Receta subida con éxito:', response.data);
+    //     navigate(`/`);
+    //     } catch (error) {
+    //     console.error('Error al subir la receta:', error);
+    //     }
+    // };
+
+// --------------------------------------------------------------
+    // DESDE ACA, PRUEBA EDICION DE CODIGO PARA QUE FUNCIONE EL FORM
+    useEffect(() => {
+            getAllIngredients();
+        }, []);
+
+        const [allIngredients, setAllIngredients] = useState({});
+
+        const getAllIngredients = async () => {
+            try {
+                let res = await axios.get("http://localhost:8000/api/ingredients", {
+                    withCredentials: true,
+                });
+                setAllIngredients(res.data);
+                } catch (err) {
+                console.log(err);
+                }
+            };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        createRecipe();
     };
 
+    const createRecipe = async () => {
+        try {
+        let res = await axios.post("http://localhost:8000/api/recipe", recipeData, {
+            withCredentials: true,
+        });
+        } catch (err) {
+        console.log(err);
+        }
+    };
 
     return (
         <Container>
@@ -91,6 +127,18 @@ function RecipeForm() {
                             setCurrentIngredient(newValue);
                         }}
                         options={['Ingredient 1', 'Ingredient 2', 'Ingredient 3']}
+
+                        // options={
+                        //     allIngredients &&
+                        //     allIngredients.map((item, idx) => (
+                        //         <div key={idx}>
+                        //             <label>{item.name}</label>
+                        //         </div>
+                        //     ))
+                        // }
+
+                        // options={allIngredients.name}
+
                         renderInput={(params) => <TextField {...params} variant='outlined' />}
                         />
                 </div>
