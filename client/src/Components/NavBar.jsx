@@ -63,8 +63,8 @@ const NavBar = (props) => {
             {/* Link to HomePage */}
             {currentView !== "logRegPage" && currentView !== "homePage" && (
                 <Link
-                to="/"
-                className="nav-link text-white fs-5 mx-2 text-decoration-underline"
+                to="/recipe/"
+                className="nav-link text-white fs-5 text-decoration-underline"
                 >
                 Home
                 </Link>
@@ -72,7 +72,7 @@ const NavBar = (props) => {
             {/* Button for Logout */}
             {currentView !== "logRegPage" && currentView !== "homePage" && (
                 <button
-                className="btn nav-link text-white fs-5 mx-2 px-5 text-decoration-underline shadow-none"
+                className="btn nav-link text-white fs-5 px-5 text-decoration-underline shadow-none"
                 onClick={handleLogout}
                 >
                 Logout
