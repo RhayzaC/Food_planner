@@ -9,6 +9,7 @@ import 'bootswatch/dist/minty/bootstrap.min.css';
 const FoodCardPrueba2 = (props) => {
     // Hooks and Variables
     const [recipes, setRecipes] = useState([]);
+    const [selectedRecipe, setSelectedRecipe] = useState();
 
     useEffect(() => {
         getAllRecipes();
@@ -16,8 +17,12 @@ const FoodCardPrueba2 = (props) => {
 
     const [showModal, setShowModal] = useState(false);
 
-    const handleShowModal = () => {
-        setShowModal(true);
+    const handleShowModal = (recipe) => {
+        setSelectedRecipe(recipe)
+        setTimeout(() => {
+            setShowModal(true)
+        }, 500);
+    
     };
 
     const handleCloseModal = () => {
@@ -57,17 +62,18 @@ const FoodCardPrueba2 = (props) => {
             <p><em>{category}:</em></p>
             {filteredByMealType.map((item, idx) => (
             <div key={idx}>
-                <button type="button" className="btn btn-primary" onClick={handleShowModal}>
+                <button type="button" className="btn btn-primary" onClick={() => handleShowModal(item)}>
                     {item.title}
                 </button>
             </div>
             ))}
-            <ModalRecipe show={showModal} onHide={handleCloseModal}></ModalRecipe>
         </div>
         );
     };
 
     return (
+        <>
+        <ModalRecipe show={showModal} onHide={handleCloseModal} id={selectedRecipe?._id}></ModalRecipe>
         <Card className='' style={{ font:'bold', width: '300px' }}>
         <Card.Title className="font-weight-bold text-center m-0 p-0 " style={{ color: '#000' }}>
             <em>{props.dayName}</em>
@@ -82,6 +88,7 @@ const FoodCardPrueba2 = (props) => {
             {renderRecipes('Snacks')}
         </Card.Body>
         </Card>
+        </>
     );
 };
 

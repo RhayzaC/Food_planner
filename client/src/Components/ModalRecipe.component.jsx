@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+// import { useParams } from "react-router-dom"
 import axios from "axios"
 import { Modal, Button } from 'react-bootstrap';
 
 const ModalRecipe = (props) => {
     const [recipe, setRecipe] = useState({});
-    const {id} = useParams();
+    // const {id} = useParams();
 
     const getOneRecipe = () => {
-        axios.get(`http://localhost:8000/api/recipe/${id}`, {withCredentials: true})
+        axios.get(`http://localhost:8000/api/recipe/${props?.id}`, {withCredentials: true})
             .then((response) => {
                 setRecipe(response.data)
             })
@@ -18,7 +18,14 @@ const ModalRecipe = (props) => {
         console.log(recipe)
     }
 
-    useEffect(getOneRecipe, [id])
+    useEffect(() => { 
+        console.log(props)
+        if (props.id) {
+            getOneRecipe()
+        }},
+        [props.id]
+    )
+
 
     return (
         <div>

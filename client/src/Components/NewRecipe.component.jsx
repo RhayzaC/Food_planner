@@ -9,7 +9,6 @@ import { Delete } from '@mui/icons-material'; // Importa el icono "Delete" de Ma
 function RecipeForm() {
     const [recipeData, setRecipeData] = useState({
         title: '',
-        ingredients: {},
         measure: '',
         qty: '',
         servings: '',
@@ -40,14 +39,16 @@ function RecipeForm() {
 
     const handleAddIngredient = () => {
         const newIngredient = {
-        ingredient: currentIngredient,
+        ingredient: {...currentIngredient},
         qty: currentQty,
         measure: currentMeasure,
         };
+        console.log(newIngredient);
         setIngredientsList([...ingredientsList, newIngredient]);
         setCurrentIngredient('');
         setCurrentQty('');
         setCurrentMeasure('');
+        console.log(ingredientsList);
     };
 
     const handleRemoveIngredient = (indexToRemove) => {
@@ -82,7 +83,8 @@ function RecipeForm() {
 
     const createRecipe = async () => {
         try {
-        let res = await axios.post("http://localhost:8000/api/recipe", recipeData, {
+            let data = {...recipeData, ingredients: ingredientsList.map((elmt) => {return {...elmt, ingredient: elmt.ingredient.id}})}
+        let res = await axios.post("http://localhost:8000/api/recipe", data, {
             withCredentials: true,
         });         
             navigate("/recipe/");
@@ -116,9 +118,10 @@ function RecipeForm() {
                         name='currentIngredient'
                         value={currentIngredient}
                         onChange={(event, newValue) => {
+                            console.log(newValue);
                             setCurrentIngredient(newValue);
                         }}
-                        options={allIngredients.map((ingredient) => ingredient.name)}
+                        options={allIngredients.map((ingredient) => {return {id: ingredient._id, label: ingredient.name}})}
                         renderInput={(params) => <TextField {...params} variant='outlined' />}
                         />
                 </div>
@@ -221,7 +224,7 @@ function RecipeForm() {
                 <ul className='list-unstyled'>
                 {ingredientsList.map((ingredient, index) => (
                     <li key={index} className='text-dark'>
-                    {ingredient.qty} {ingredient.measure} {ingredient.ingredient}
+                    {ingredient.qty} {ingredient.measure} {ingredient.ingredient.label}
                     <span
                         onClick={() => handleRemoveIngredient(index)}
                         style={{ cursor: 'pointer', marginLeft: '5px', color: 'red' }}

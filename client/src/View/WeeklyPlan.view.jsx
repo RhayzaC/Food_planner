@@ -15,8 +15,8 @@ const RecipesUploadView = () => {
 
     return (
         <Layout>
-        <div className="d-flex flex-column align-items-center">
-            <h1 className="text-dark text-decoration-underline">Meal Planner</h1>
+        <div className="container mt-5 mb-5 d-flex flex-column align-items-center">
+            <h1 className="text-dark text-decoration-underline mt-3">Meal Planner</h1>
             <div className="m-3 text-dark" >
                 <label>
                     Select Meal Type:
