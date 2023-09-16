@@ -29,44 +29,48 @@ const ModalRecipe = (props) => {
 
     return (
         <div>
-            <Modal show={props.show} onHide={props.onHide}>
+            <Modal show={props.show} onHide={props.onHide} >
                 <Modal.Header closeButton>
                     <Modal.Title>{recipe.title}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
                     {/* Foto de la receta*/}
-                    <div className="text-center">
+                    <div className="text-center" style={{ maxWidth: '90%', height: 'auto' }}>
                         <img
                             src={recipe.photo}
                             alt="Dish photo"
-                            className="img-fluid m-3" 
-                            style={{ maxWidth: '500px', maxHeight: '500px' }}
+                            className="img-fluid" 
+                            style={{ maxWidth: '100%', maxHeight: '500px' }}
                         />
                     </div>
 
                     {/* Tabla de ingredientes */}
-                    <table className="table table-striped m-4">
-                        <thead className="table-secondary">
-                            <tr >
-                                <th scope="col">Qty</th>
-                                <th scope="col">Measure</th>
-                                <th scope="col">Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {recipe.ingredients && recipe.ingredients.map((item, idx) => (
-                                <tr key={idx}>
-                                    <td>{item.qty}</td>
-                                    <td>{item.measure} </td>
-                                    <td>{item.ingredient.name}</td>
+                    <div className="table-responsive" style={{ maxWidth: '100vw' }}>
+                        <table className="table table-striped table-responsive mt-4">
+                            <thead className="table-secondary">
+                                <tr >
+                                    <th scope="col">Qty</th>
+                                    <th scope="col">Measure</th>
+                                    <th scope="col">Name</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {recipe.ingredients && recipe.ingredients.map((item, idx) => (
+                                    <tr key={idx}>
+                                        <td>{item.qty}</td>
+                                        <td>{item.measure} </td>
+                                        <td>{item.ingredient.name}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
 
                     {/* Instrucciones de preparación de la receta */}
-                        <h5 className="text-left">Instructions: </h5>
+                    <div className="text-left m-1">
+                        <h5>Instructions: </h5>
                         <div>{recipe.instructions}</div>
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={props.onHide}>

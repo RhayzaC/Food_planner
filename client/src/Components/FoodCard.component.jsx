@@ -10,6 +10,7 @@ const FoodCardPrueba2 = (props) => {
     // Hooks and Variables
     const [recipes, setRecipes] = useState([]);
     const [selectedRecipe, setSelectedRecipe] = useState();
+    const [mealTypeRecipes, setMealTypeRecipes] = useState({});
 
     useEffect(() => {
         getAllRecipes();
@@ -18,76 +19,90 @@ const FoodCardPrueba2 = (props) => {
     const [showModal, setShowModal] = useState(false);
 
     const handleShowModal = (recipe) => {
-        setSelectedRecipe(recipe)
-        setTimeout(() => {
-            setShowModal(true)
-        }, 500);
-    
+        setSelectedRecipe(recipe);
+        setShowModal(true);
     };
 
     const handleCloseModal = () => {
         setShowModal(false);
     };
 
+    const getRandomRecipeForEachCategory = (filteredRecipes) => {
+        const randomRecipes = {};
+        const categories = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
+        categories.forEach((category) => {
+            const categoryRecipes = filteredRecipes.filter((item) => item.category === category);
+            const randomIndex = Math.floor(Math.random() * categoryRecipes.length);
+            randomRecipes[category] = categoryRecipes[randomIndex];
+        });
+        return randomRecipes;
+    };
+
+    const filterRecipesByMealType = (mealType) => {
+        const filteredByType = recipes.filter((item) => {
+            if (mealType === 'Vegetarian') {
+                return item.vegetarian;
+            } else if (mealType === 'Healthy') {
+                return item.healthy;
+            } else if (mealType === 'Regular') {
+                return item.regular;
+            }
+            return true; // By default, show all recipes
+        });
+
+        return getRandomRecipeForEachCategory(filteredByType);
+    };
+
+    useEffect(() => {
+        const filteredRecipes = filterRecipesByMealType(props.mealType);
+        setMealTypeRecipes(filteredRecipes);
+    }, [props.mealType]);
+
     // API Functions
     const getAllRecipes = async () => {
         try {
-        let res = await axios.get('http://localhost:8000/api/recipe/');
-        setRecipes(res.data);
+            let res = await axios.get('http://localhost:8000/api/recipe/');
+            setRecipes(res.data);
         } catch (err) {
-        console.log(err);
+            console.log(err);
         }
     };
 
     // JSX
     const renderRecipes = (category) => {
-        const filteredRecipes = recipes.filter((item) => {
-        return item.category === category;
-        });
-
-        const filteredByMealType = filteredRecipes.filter((item) => {
-        // Add additional conditions here for other meal types as needed
-        if (props.mealType === 'Vegetarian') {
-            return item.vegetarian;
-        } else if (props.mealType === 'Healthy') {
-            return item.healthy;
-        } else if (props.mealType === 'Regular') {
-            return item.regular;
-        }
-        return true; // By default, show all recipes
-        });
+        const randomRecipe = mealTypeRecipes[category];
 
         return (
-        <div >
-            <p><em>{category}:</em></p>
-            {filteredByMealType.map((item, idx) => (
-            <div key={idx}>
-                <button type="button" className="btn btn-primary" onClick={() => handleShowModal(item)}>
-                    {item.title}
-                </button>
+            <div>
+                <p><em>{category}:</em></p>
+                {randomRecipe && (
+                    <div key={randomRecipe._id}>
+                        <button type="button" className="btn btn-primary" onClick={() => handleShowModal(randomRecipe)}>
+                            {randomRecipe.title}
+                        </button>
+                    </div>
+                )}
             </div>
-            ))}
-        </div>
         );
     };
 
     return (
         <>
-        <ModalRecipe show={showModal} onHide={handleCloseModal} id={selectedRecipe?._id}></ModalRecipe>
-        <Card className='' style={{ font:'bold', width: '300px' }}>
-        <Card.Title className="font-weight-bold text-center m-0 p-0 " style={{ color: '#000' }}>
-            <em>{props.dayName}</em>
-        </Card.Title>
-        <Card.Body className='text-center '>
-            {renderRecipes('Breakfast')}
-            <hr/>
-            {renderRecipes('Lunch')}
-            <hr/>
-            {renderRecipes('Dinner')}
-            <hr/>
-            {renderRecipes('Snacks')}
-        </Card.Body>
-        </Card>
+            <ModalRecipe show={showModal} onHide={handleCloseModal} id={selectedRecipe?._id}></ModalRecipe>
+            <Card className='' style={{ font: 'bold', width: '300px' }}>
+                <Card.Title className="font-weight-bold text-center m-0 p-0 " style={{ color: '#000' }}>
+                    <em>{props.dayName}</em>
+                </Card.Title>
+                <Card.Body className='text-center '>
+                    {renderRecipes('Breakfast')}
+                    <hr />
+                    {renderRecipes('Lunch')}
+                    <hr />
+                    {renderRecipes('Dinner')}
+                    <hr />
+                    {renderRecipes('Snacks')}
+                </Card.Body>
+            </Card>
         </>
     );
 };

@@ -3,6 +3,8 @@ import axios from "axios";
 import Layout from '../Templates/Layout.templates';
 import { useParams, useNavigate, Link } from "react-router-dom";
 
+import ShopList from "../Components/ShopList.component";
+
 const ShoppingList = (props) => {
 
     const {selectedMealPlan} = props;
@@ -62,14 +64,15 @@ const ShoppingList = (props) => {
     return (
         <Layout>
         <div>
-            <h2>Shopping List</h2>
+            <ShopList></ShopList>
+            {/* <h2>Shopping List</h2>
             <ul>
                 {shoppingList.map((item, index) => (
                 <li key={index}>
                     {item.quantity} {item.unit} of {item.ingredientName}
                 </li>
                 ))}
-            </ul>
+            </ul> */}
         </div>
         </Layout>
     );

@@ -20,7 +20,7 @@ const RecipesUploadView = () => {
             <div className="m-3 text-dark" >
                 <label>
                     Select Meal Type:
-                    <select className="m-2 bg-info text-black"
+                    <select className="m-2 btn btn-warning text-black"
                             value={selectedMealType} 
                             onChange={handleMealTypeChange}
                     >
