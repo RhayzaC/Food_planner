@@ -11,7 +11,6 @@ const NavBar = (props) => {
   // I) HOOKS AND VARIABLES
   // --------------------------------------------------
 
-  // Destructuring Props
     const { setUser } = props;
 
     // React Router Hooks - Params and Navigation
@@ -20,10 +19,14 @@ const NavBar = (props) => {
 
     // Aux Variables
     let currentView;
-    if (location.pathname === "/") currentView = "homePage";
-    else if (location.pathname === "/login") currentView = "logRegPage";
-    else currentView = "detailsPage";
-
+        if (location.pathname === "/" || location.pathname === "/login") {
+            currentView = "LogReg Page";
+        } else if (location.pathname === "/recipe/new/" || location.pathname === "/recipe/shoplist/") {
+            currentView = "Details Page";
+        } else {
+            currentView = "Home Page";
+        }
+    
     // --------------------------------------------------
     // II) HANDLERS AND AUXILIAR FUNCTIONS
     // --------------------------------------------------
@@ -46,7 +49,7 @@ const NavBar = (props) => {
         } catch (err) {
         console.log("Error: ", err)
         }
-    }
+    };
 
     // --------------------------------------------------
     // III) JSX
@@ -62,16 +65,16 @@ const NavBar = (props) => {
             </Link>
             <div className="d-flex ms-auto">
             {/* Link to HomePage */}
-            {currentView !== "logRegPage" && currentView !== "homePage" && (
+            {currentView === "Details Page" && (
                 <Link
-                to="/recipe/"
-                className="nav-link text-white fs-5 text-decoration-underline"
+                    to="/recipe/"
+                    className="nav-link text-white fs-5 text-decoration-underline"
                 >
                 Home
                 </Link>
             )}
             {/* Button for Logout */}
-            {currentView !== "logRegPage" && currentView !== "homePage" && (
+            {(currentView !== "logRegPage" && (currentView === "Home Page" || currentView === "Details Page")) &&(
                 <button
                 className="btn nav-link text-white fs-5 px-5 text-decoration-underline shadow-none"
                 onClick={handleLogout}

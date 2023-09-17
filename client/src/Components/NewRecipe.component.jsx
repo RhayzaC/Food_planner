@@ -15,9 +15,9 @@ function RecipeForm() {
         instructions: '',
         photo: '',
         category: '',
-        //vegetarian: '',
-        //healthy: '',
-        //regular: '',
+        vegetarian: false,
+        healthy: false,
+        regular: false,
     });
 
     const navigate = useNavigate();
@@ -27,16 +27,17 @@ function RecipeForm() {
     const [currentIngredient, setCurrentIngredient] = useState('');
     const [currentQty, setCurrentQty] = useState('');
     const [currentMeasure, setCurrentMeasure] = useState('');
+    const [isAccordionOpen, setIsAccordionOpen] = useState(true); // Estado para controlar si el acordeón está abierto
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
-        //if (type === 'checkbox') {
-            //setRecipeData({ ...recipeData, [name]: checked });
-            //} else {
+        if (type === 'checkbox') {
+            setRecipeData({ ...recipeData, [name]: checked });
+            } else {
             setRecipeData({ ...recipeData, [name]: value });
             }
+    };
     
-
     const handleAddIngredient = () => {
         const newIngredient = {
         ingredient: {...currentIngredient},
@@ -45,6 +46,9 @@ function RecipeForm() {
         };
         console.log(newIngredient);
         setIngredientsList([...ingredientsList, newIngredient]);
+        // Abre automáticamente el acordeón después de agregar un ingrediente
+        setIsAccordionOpen(true);
+
         setCurrentIngredient('');
         setCurrentQty('');
         setCurrentMeasure('');
@@ -95,35 +99,35 @@ function RecipeForm() {
 
     return (
         <Container>
-        <div style={{ display:'flex', margin: "20px", marginTop:"50px", borderRadius: "10px", backgroundColor: "#95b8f6", padding: "30px" }}>
-        <div style={{ marginRight: '50px' }}>
-            <h2 className='text-dark text-center text-decoration-underline mb-4'> Create a Recipe</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                <label className='text-black' htmlFor="title"> Tittle:</label>
-                <input
-                    type="text"
-                    className='form-control'
-                    id="title"
-                    name="title"
-                    value={recipeData.title}
-                    onChange={handleChange}
-                    required
-                />
-                </div>
-                <div className="mb-3">
-                    <label className='text-black' htmlFor="currentIngredient">Ingredient:</label>
-                    <Autocomplete
-                        id='currentIngredient'
-                        name='currentIngredient'
-                        value={currentIngredient}
-                        onChange={(event, newValue) => {
-                            console.log(newValue);
-                            setCurrentIngredient(newValue);
-                        }}
-                        options={allIngredients.map((ingredient) => {return {id: ingredient._id, label: ingredient.name}})}
-                        renderInput={(params) => <TextField {...params} variant='outlined' />}
-                        />
+            <div style={{ display:'flex', margin: "20px", marginTop:"50px", borderRadius: "10px", backgroundColor: "#95b8f6", padding: "30px" }}>
+            <div style={{ marginRight: '50px' }}>
+                <h2 className='text-dark text-decoration-underline mb-4'> Create a Recipe</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-3">
+                    <label className='text-black' htmlFor="title"> Tittle:</label>
+                    <input
+                        type="text"
+                        className='form-control'
+                        id="title"
+                        name="title"
+                        value={recipeData.title}
+                        onChange={handleChange}
+                        required
+                    />
+                    </div>
+                    <div className="mb-3">
+                        <label className='text-black' htmlFor="currentIngredient">Ingredient:</label>
+                        <Autocomplete
+                            id='currentIngredient'
+                            name='currentIngredient'
+                            value={currentIngredient}
+                            onChange={(event, newValue) => {
+                                console.log(newValue);
+                                setCurrentIngredient(newValue);
+                            }}
+                            options={allIngredients.map((ingredient) => {return {id: ingredient._id, label: ingredient.name}})}
+                            renderInput={(params) => <TextField {...params} variant='outlined' />}
+                            />
                 </div>
                 <div className="mb-3">
                 <label className='text-black' htmlFor="currentQty">Qty:</label>
@@ -150,8 +154,9 @@ function RecipeForm() {
                         />
                 </div>
                     <Button
+                    className='mb-3'
                     variant='contained'
-                    color='secondary'
+                    color='primary'
                             onClick={handleAddIngredient}
                         >
                         Add Ingredient
@@ -208,17 +213,57 @@ function RecipeForm() {
                         <option value="Snacks">Snacks</option>
                 </select>
             </div>
-            <button className="mt-3 px-4 btn btn-ml btn-success mx-auto" type="submit">
+            <br/>
+            {/* Checkboxes para opciones */}
+            <div className="text-center d-flex justify-content-around">
+                            <label className='d-inline-flex mx-3 text-black text-decoration-underline'>
+                                Options:
+                            </label>
+                            <div style={{ flex: 2 }}>
+                                <label className=' d-flex text-dark mx-2'>
+                                    <input
+                                        type="checkbox"
+                                        name="healthy"
+                                        checked={recipeData.healthy}
+                                        onChange={handleChange}
+                                    />
+                                    Healthy
+                                </label>
+                            </div>
+                            <div style={{ flex: 2 }}>
+                            <label className='d-flex text-dark mx-2'>
+                                    <input
+                                        type="checkbox"
+                                        name="regular"
+                                        checked={recipeData.regular}
+                                        onChange={handleChange}
+                                    />
+                                    Regular
+                                </label>
+                            </div>
+                            <div style={{ flex: 2 }}>
+                            <label className='d-flex text-dark mx-2'>
+                                    <input
+                                        type="checkbox"
+                                        name="vegetarian"
+                                        checked={recipeData.vegetarian}
+                                        onChange={handleChange}
+                                    />
+                                    Vegetarian
+                                </label>
+                            </div>
+                        </div>
+                        <br/>
+            <button className="mt-3 px-4 btn btn-ml btn-secondary mx-auto" type="submit">
                 Save
             </button>
             </form>
             </div>
-        <div  className='my-5 m-5' style={{ flex: 1 }}>
-        
-        {/* Columna de la lista de ingredientes */}
-        <Accordion>
+    {/* Columna de la lista de ingredientes */}
+    <div style={{ flex: 1, marginTop: '180px', marginBottom: 'auto', marginLeft:'20px' }}>
+        <Accordion expanded={isAccordionOpen} onChange={() => setIsAccordionOpen(!isAccordionOpen)}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls='ingredient-list-content' id='ingredient-list-header'>
-                <Typography className='text-info'>Selected Ingredients:</Typography>
+                <Typography className='text-info font-italic'>Selected Ingredients:</Typography>
             </AccordionSummary>
             <AccordionDetails>
                 <ul className='list-unstyled'>
@@ -227,7 +272,7 @@ function RecipeForm() {
                     {ingredient.qty} {ingredient.measure} {ingredient.ingredient.label}
                     <span
                         onClick={() => handleRemoveIngredient(index)}
-                        style={{ cursor: 'pointer', marginLeft: '5px', color: 'red' }}
+                        style={{ cursor: 'pointer', marginLeft: '4px', color: 'red' }}
                     >
                         <Delete />
                     </span>
@@ -236,9 +281,8 @@ function RecipeForm() {
                 </ul>
             </AccordionDetails>
             </Accordion>
-                </div>
-                </div>
-                
+    </div>
+</div>
             </Container>
 
     );
