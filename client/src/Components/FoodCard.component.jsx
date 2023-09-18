@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Accordion, Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 import ModalRecipe from "../Components/ModalRecipe.component";
 
@@ -72,6 +72,8 @@ const FoodCardPrueba2 = (props) => {
     const renderRecipes = (category) => {
         const randomRecipe = mealTypeRecipes[category];
 
+        console.log(`Recipes for ${category}:`, randomRecipe);
+        
         return (
             <div>
                 <p><em>{category}:</em></p>
@@ -108,3 +110,4 @@ const FoodCardPrueba2 = (props) => {
 };
 
 export default FoodCardPrueba2;
+
