@@ -15,6 +15,20 @@ const RecipesUploadView = () => {
         { day: "Sunday", recipes: [] },
     ]);
 
+    // Define a function to update the weeklyRecipes state
+    const updateWeeklyRecipes = (dayName, recipes) => {
+        const updatedWeeklyRecipes = [...weeklyRecipes];
+        const dayIndex = updatedWeeklyRecipes.findIndex((dayRecipe) => dayRecipe.day === dayName);
+    
+        if (dayIndex !== -1) {
+            updatedWeeklyRecipes[dayIndex].recipes = Object.values(recipes);
+            setWeeklyRecipes(updatedWeeklyRecipes);
+    
+            // Log the updated weeklyRecipes
+            console.log("Updated weeklyRecipes:", updatedWeeklyRecipes);
+        }
+    };
+    
     const handleMealTypeChange = (event) => {
         setSelectedMealType(event.target.value);
     };
@@ -23,7 +37,7 @@ const RecipesUploadView = () => {
 
     // Function to navigate to the shoplist route
     const goToShopList = () => {
-        navigate("/recipe/shoplist", { state: { weeklyRecipes } }); // Pass weeklyRecipes as a prop to the route
+        navigate("/recipe/shoplist", {state: { weeklyRecipes }}); // Pass weeklyRecipes as a prop to the route
     };
 
     return (
@@ -51,8 +65,7 @@ const RecipesUploadView = () => {
                             key={dayRecipe.day}
                             dayName={dayRecipe.day}
                             mealType={selectedMealType}
-                            weeklyRecipes={weeklyRecipes}
-                            setWeeklyRecipes={setWeeklyRecipes}
+                            onUpdateRecipes={updateWeeklyRecipes} // Pass the update function
                         />
                     ))}
                 </div>

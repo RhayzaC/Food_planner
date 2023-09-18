@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card } from 'react-bootstrap';
 
-import ModalRecipe from "../Components/ModalRecipe.component";
+import ModalRecipe from '../Components/ModalRecipe.component';
 
 import 'bootswatch/dist/minty/bootstrap.min.css';
 
@@ -27,7 +27,7 @@ const FoodCardPrueba2 = (props) => {
         setShowModal(false);
     };
 
-    const getRandomRecipeForEachCategory = (filteredRecipes) => {
+    const getRandomRecipesForDay = (filteredRecipes) => {
         const randomRecipes = {};
         const categories = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
         categories.forEach((category) => {
@@ -50,7 +50,7 @@ const FoodCardPrueba2 = (props) => {
             return true; // By default, show all recipes
         });
 
-        return getRandomRecipeForEachCategory(filteredByType);
+        return getRandomRecipesForDay(filteredByType);
     };
 
     useEffect(() => {
@@ -87,6 +87,13 @@ const FoodCardPrueba2 = (props) => {
             </div>
         );
     };
+
+    useEffect(() => {
+        if (Object.keys(mealTypeRecipes).length > 0) {
+            // After recipes are generated, update the weeklyRecipes
+            props.onUpdateRecipes(props.dayName, mealTypeRecipes);
+        }
+    }, [mealTypeRecipes]);
 
     return (
         <>
