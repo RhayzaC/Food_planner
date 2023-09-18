@@ -1,15 +1,17 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import Layout from "../Templates/Layout.templates";
+
 
 const ShopList = (props) => {
     // Access the weeklyRecipes prop from props
-    //esta es la línea de Location que teníamos "const { location } = props;"
-    const location  = useLocation(); // Cambié esta linea solo para que funcionara el console.log
+    const { location } = props; 
     const { state } = location || {}; // Safely access the state object
 
     // Now you can access the weeklyRecipes
     const weeklyRecipes = state ? state.weeklyRecipes : [];
-    console.log("weeklyRecipes:", weeklyRecipes);
+    //agregando console.log de prueba
+    console.log("weeklyRecipes:", weeklyRecipes); 
+    console.log(props); 
 
 
     // Function to calculate the shopping list
@@ -38,7 +40,9 @@ const ShopList = (props) => {
 
 
     return (
+        <Layout>
         <div>
+
             <h1>Shopping List</h1>
             <ul>
                 {shoppingList.map((ingredient, index) => (
@@ -46,6 +50,7 @@ const ShopList = (props) => {
                 ))}
             </ul>
         </div>
+        </Layout>
     );
 };
 

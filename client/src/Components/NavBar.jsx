@@ -21,7 +21,7 @@ const NavBar = (props) => {
     let currentView;
         if (location.pathname === "/" || location.pathname === "/login") {
             currentView = "LogReg Page";
-        } else if (location.pathname === "/recipe/new/" || location.pathname === "/recipe/shoplist/") {
+        } else if (location.pathname === "/recipe/new/" || location.pathname === "/recipe/shoplist") {
             currentView = "Details Page";
         } else {
             currentView = "Home Page";
