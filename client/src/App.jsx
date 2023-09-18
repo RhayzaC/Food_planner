@@ -1,15 +1,16 @@
 import './App.css';
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import HomePage from './View/HomePage.view';
 import NewRecipe from './View/NewRecipe.view';
 import DetailRecipe from './View/DetailRecipe.view';
 import WeeklyPlan from './View/WeeklyPlan.view';
 import ShopList from './View/ShopList.view';
 
-import './styles.css'; // Asegúrate de que la ruta sea correcta
+import ProtectedRoute from './Components/ProtectedRoutes.component';
+import './styles.css'; 
 
-//import ProtectedRoute from './Components/ProtectedRoutes.component';
+
 import "bootswatch/dist/minty/bootstrap.min.css";
 
 function App() {
@@ -18,16 +19,48 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index={true} path="/" element={<HomePage setUser={setUser} />} />
-        <Route index={true} path="/recipe/new/" element={<NewRecipe setUser={setUser} />} />
-        <Route index={true} path="/recipe/:id/" element={<DetailRecipe setUser={setUser} />} />
-        <Route index={true} path="/recipe/" element={<WeeklyPlan setUser={setUser} />} />
-        <Route index={true} path="/recipe/shoplist" element={<ShopList setUser={setUser} />} />
+  {/* Rutas públicas (accesibles para todos) */}
+  <Route index={true} path="/" element={<HomePage setUser={setUser} />} />
+  
+  {/* Rutas protegidas */}
+  <Route
+    path="/recipe/new/"
+    element={
+      <ProtectedRoute user={user} redirected="/login">
+        <NewRecipe setUser={setUser} />
+      </ProtectedRoute>
+    }
+  />
+  <Route
+    path="/recipe/:id/"
+    element={
+      <ProtectedRoute user={user} redirected="/login">
+        <DetailRecipe setUser={setUser} />
+      </ProtectedRoute>
+    }
+  />
+  <Route
+    path="/recipe/"
+    element={
+      <ProtectedRoute user={user} redirected="/login">
+        <WeeklyPlan setUser={setUser} />
+      </ProtectedRoute>
+    }
+  />
+  <Route
+    path="/recipe/shoplist"
+    element={
+      <ProtectedRoute user={user} redirected="/login">
+        <ShopList setUser={setUser} />
+      </ProtectedRoute>
+    }
+  />
 
-        {/*<Route path="/pirate/new/" element={<ProtectedRoute user={user} redirected={"/"}> <PirateCreateView /> </ProtectedRoute>} />
-        <Route path="/pirate/:id" element={<ProtectedRoute user={user} redirected={"/"}> <PirateDetailView /> </ProtectedRoute>} />*/}
-        <Route path='*' element={<Navigate to="/" />} />
-      </Routes>
+  {/* Otras rutas públicas o protegidas según sea necesario */}
+  
+  <Route path='*' element={<Navigate to="/" />} />
+</Routes>
+
     </BrowserRouter>
   );
 }

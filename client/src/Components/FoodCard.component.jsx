@@ -110,4 +110,3 @@ const FoodCardPrueba2 = (props) => {
 };
 
 export default FoodCardPrueba2;
-
