@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import { motion, useAnimation } from "framer-motion"; // Importa motion y useAnimation
 import Layout from "../Templates/Layout.templates";
 import FoodCard from "../Components/FoodCard.component";
+import html2canvas from 'html2canvas';
 
 const RecipesUploadView = () => {
     const [selectedMealType, setSelectedMealType] = useState("");
@@ -47,7 +48,20 @@ const RecipesUploadView = () => {
         controls.start({ opacity: 1, x: 0 }); // Inicia la animación
     }, [controls]);
 
+    const captureScreenshot = () => {
+    const elementToCapture = document.getElementById('MyWeeklyPlan'); // Replace 'capture-element' with the ID of the element you want to capture
+    html2canvas(elementToCapture).then((canvas) => {
+        const screenshot = canvas.toDataURL('image/png');
+        // Create a download link for the screenshot
+        const downloadLink = document.createElement('a');
+        downloadLink.href = screenshot;
+        downloadLink.download = 'screenshot.png';
+        downloadLink.click();
+    });
+    };
+
     return (
+        <div >
         <Layout>
             <motion.div
                 className="container mt-5 mb-5 d-flex flex-column align-items-center"
@@ -59,7 +73,7 @@ const RecipesUploadView = () => {
                 <h1 className="text-dark text-decoration-underline mt-3">Meal Planner</h1>
                 <div className="m-3 text-dark">
                     <label>
-                        Select Meal Type:
+                        Select Your Menu Type:
                         <select
                             className="m-2 btn btn-warning text-black"
                             value={selectedMealType}
@@ -71,7 +85,7 @@ const RecipesUploadView = () => {
                         </select>
                     </label>
                 </div>
-                <div className="d-flex text-black" style={{ backgroundColor: 'lightpink', width: '1325px' }}>
+                <div id="MyWeeklyPlan" className="d-flex text-black" style={{ backgroundColor: 'lightpink', width: '1325px' }}>
                     <hr />
                     {weeklyRecipes.map((dayRecipe) => (
                         <FoodCard
@@ -83,21 +97,27 @@ const RecipesUploadView = () => {
                     ))}
                 </div>
                 <div className="d-flex text-center">
-                    {/* Use onClick to call the goToShopList function */}
+                    <button
+                        type="button"
+                        onClick={captureScreenshot}
+                        className="mt-4 px-4 btn btn-m btn-info mx-5"
+                    >
+                        <b>Download weekly Plan</b>
+                    </button>
+
                     <div className="d-flex text-center">
                         <button
                             type="button"
                             onClick={goToShopList}
-                            className="mt-4 px-4 btn btn-m btn-primary mx-2"
+                            className="mt-4 px-4 btn btn-m btn-primary mx-5"
                         >
-                            See shopping list
+                            <b>See shopping list</b>
                         </button>
                     </div>
                 </div>
-            
         </motion.div>
-
         </Layout>
+        </div>
     );
 };
 

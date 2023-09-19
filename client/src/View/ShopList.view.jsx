@@ -1,6 +1,8 @@
 import React from "react";
 import Layout from "../Templates/Layout.templates";
 import { useLocation } from "react-router-dom";
+import html2canvas from 'html2canvas';
+import {FaShoppingBasket} from 'react-icons/fa';
 
 const ShopList = (props) => {
     // Access the weeklyRecipes prop from props
@@ -8,6 +10,18 @@ const ShopList = (props) => {
 
     // Now you can access the weeklyRecipes
     const weeklyRecipes = location.state?.weeklyRecipes || [];
+
+    const captureScreenshot = () => {
+        const elementToCapture = document.getElementById('MyShopList'); // Replace 'capture-element' with the ID of the element you want to capture
+        html2canvas(elementToCapture).then((canvas) => {
+            const screenshot = canvas.toDataURL('image/png');
+            // Create a download link for the screenshot
+            const downloadLink = document.createElement('a');
+            downloadLink.href = screenshot;
+            downloadLink.download = 'screenshot.png';
+            downloadLink.click();
+        });
+        };
 
     // Function to calculate the shopping list
     const calculateShoppingList = () => {
@@ -52,9 +66,14 @@ const ShopList = (props) => {
     return (
         <Layout>
             <br/>
-            <div className="card card-title text-white bg-primary mb-3 mt-5">
+            <div id="MyShopList" className="card card-title text-white bg-primary mb-3 mt-5">
                 <div className="card-header">
-                    <h1 className="card-title">Shopping List</h1>
+                    <h1 className="card-title">
+                        Shopping List 
+                        <div>
+                            <FaShoppingBasket/>
+                        </div>
+                    </h1>
                 </div>
                 <div className="card-body">
                     <ul className="card-text" style={{ textAlign: 'left' }}>
@@ -64,7 +83,13 @@ const ShopList = (props) => {
                     </ul>
                 </div>
             </div>
-            <br/>
+            <button
+                    type="button"
+                    onClick={captureScreenshot}
+                    className="my-4 px-4 btn btn-m btn-secondary mx-2"
+                >
+                    <b>Download shopping list</b>
+            </button>
         </Layout>
     );
 };

@@ -64,21 +64,21 @@ const NavBar = (props) => {
                             {showHomeLink && (
                                 <li className="nav-item">
                                     <Link to="/recipe/" className={`nav-link text-light mx-3`}>
-                                        Home
+                                        <b>Home</b>
                                     </Link>
                                 </li>
                             )}
                             {showRecipes && (
                                 <li className="nav-item">
                                     <Link to="/recipe/new/" className={`nav-link text-white mx-3`}>
-                                        New Recipe
+                                        <b>New Recipe</b>
                                     </Link>
                                 </li>
                             )}
                             {showAllRecipes && (
                                 <li className="nav-item">
                                     <Link to="/recipe/all/" className={`nav-link text-white mx-3`}>
-                                        All Recipes
+                                        <b>All Recipes</b>
                                     </Link>
                                 </li>
                             )}
@@ -88,7 +88,7 @@ const NavBar = (props) => {
                                 className="btn btn-outline-info text-light mx-4"
                                 onClick={handleLogout}
                             >
-                                Logout
+                                <b>Logout</b>
                             </button>
                         )}
                     </div>

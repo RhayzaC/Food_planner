@@ -7,7 +7,7 @@ import Layout from "../Templates/Layout.templates";
 function AllRecipes() {
     const [recipes, setRecipes] = useState([]);
     const [pageNumber, setPageNumber] = useState(1);
-    const recipesPerPage = 12;
+    const recipesPerPage = 6;
 
     useEffect(() => {
         axios
@@ -32,12 +32,12 @@ function AllRecipes() {
 
     return (
         <Layout>
-        <div style={{ minHeight: "100vh", padding: "20px" }}>
+        <div style={{ minHeight: "100vh" }}>
             <div className="container mt-5">
                 <br/>
-                <div className="row">
+                <div className="row d-flex align-items-stretch">
                     {recipesToDisplay.map((recipe, index) => (
-                        <div className="col-md-4 mb-4" key={index}>
+                        <div className="col-md-4 mb-4 d-flex align-items-stretch" key={index}>
                             <Card>
                                 <Card.Img
                                     variant="top"
@@ -62,7 +62,7 @@ function AllRecipes() {
                                                 <Accordion.Body className="text-info">
                                                     {recipe.ingredients &&
                                                         recipe.ingredients.map((item, idx) => (
-                                                            <ul key={idx}>
+                                                            <ul key={idx} style={{ textAlign: 'left' }}>
                                                                 <li>
                                                                     {item.qty}{" "}
                                                                     {item.measure || ""}{" "}
@@ -72,7 +72,7 @@ function AllRecipes() {
                                                         ))}
                                                 </Accordion.Body>
                                                 <hr />
-                                                <Accordion.Body>
+                                                <Accordion.Body style={{ textAlign: 'left' }}>
                                                     {recipe.instructions}
                                                 </Accordion.Body>
                                             </Accordion.Item>
