@@ -1,91 +1,99 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { GiMeal } from "react-icons/gi"; // Import the icon from react-icons
+import { GiMeal } from "react-icons/gi";
 import "bootswatch/dist/minty/bootstrap.min.css";
-
 import axios from "axios";
-import _ from "lodash";
 
 const NavBar = (props) => {
-  // --------------------------------------------------
-  // I) HOOKS AND VARIABLES
-  // --------------------------------------------------
-
     const { setUser } = props;
-
-    // React Router Hooks - Params and Navigation
     const location = useLocation();
     const navigate = useNavigate();
 
-    // Aux Variables
-    let currentView;
-        if (location.pathname === "/" || location.pathname === "/login") {
-            currentView = "LogReg Page";
-        } else if (location.pathname === "/recipe/new/" || location.pathname === "/recipe/shoplist") {
-            currentView = "Details Page";
-        } else {
-            currentView = "Home Page";
-        }
-    
-    // --------------------------------------------------
-    // II) HANDLERS AND AUXILIAR FUNCTIONS
-    // --------------------------------------------------
+    const isActive = (path) => {
+        return location.pathname === path ? "active" : "";
+    };
 
-    // i) Handlers
+    const isHomePage = location.pathname === "/recipe/";
+    const isLoginPage = location.pathname === "/";
+    const isNewRecipe = location.pathname === "/recipe/new/";
+    const isAllRecipes = location. pathname === "/recipe/all/";
+    const isShopList = location.pathname === "/recipe/shoplist";
+
+    const showHomeLink = !isHomePage && !isLoginPage;
+    const showRecipes = isHomePage || !isLoginPage && isAllRecipes || isShopList;
+    const showAllRecipes = isHomePage || !isLoginPage && isNewRecipe || isShopList;
+    const showLogoutButton = !isLoginPage;
+    
+
     const handleLogout = () => {
         logoutUser();
     };
 
-    // ii) API Calls
     const logoutUser = async () => {
         try {
-        await axios.get("http://localhost:8000/api/users/logout",
-            { withCredentials: true }
-        );
-        localStorage.removeItem("user");
-        //setUser(null)
-        navigate("/")
-
+            await axios.get("http://localhost:8000/api/users/logout", {
+                withCredentials: true,
+            });
+            localStorage.removeItem("user");
+            navigate("/");
         } catch (err) {
-        console.log("Error: ", err)
+            console.log("Error: ", err);
         }
     };
 
-    // --------------------------------------------------
-    // III) JSX
-    // --------------------------------------------------
     return (
-        <div >
-        <nav className="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top">
-        <Link to="/" className="navbar-brand d-flex align-items-center">
-            <div className="mx-3"> 
-                <GiMeal size={50} className= "p-1 mb-1 " />
-            </div>
-            <h2 className="mx-3 my-0 text-black">Food Planner</h2>
-            </Link>
-            <div className="d-flex ms-auto">
-            {/* Link to HomePage */}
-            {currentView === "Details Page" && (
-                <Link
-                    to="/recipe/"
-                    className="nav-link text-white fs-5 text-decoration-underline"
-                >
-                Home
-                </Link>
-            )}
-            {/* Button for Logout */}
-            {(currentView !== "logRegPage" && (currentView === "Home Page" || currentView === "Details Page")) &&(
-                <button
-                className="btn nav-link text-white fs-5 px-5 text-decoration-underline shadow-none"
-                onClick={handleLogout}
-                >
-                Logout
-                </button>
-            )}
-            </div>
-        </nav>
-        </div>
-
+            <nav className="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top">
+                <div className="container-fluid">
+                    <div className="mx-3">
+                        <GiMeal size={50} className="p-1 mb-1 text-light" />
+                    </div>
+                    <h2 className="mx-3 my-0 text-white">Food Planner</h2>
+                    <button
+                        className="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarColor01"
+                        aria-controls="navbarColor01"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarColor01">
+                        <ul className="navbar-nav me-auto">
+                            {showHomeLink && (
+                                <li className="nav-item">
+                                    <Link to="/recipe/" className={`nav-link text-light mx-3`}>
+                                        Home
+                                    </Link>
+                                </li>
+                            )}
+                            {showRecipes && (
+                                <li className="nav-item">
+                                    <Link to="/recipe/new/" className={`nav-link text-white mx-3`}>
+                                        New Recipe
+                                    </Link>
+                                </li>
+                            )}
+                            {showAllRecipes && (
+                                <li className="nav-item">
+                                    <Link to="/recipe/all/" className={`nav-link text-white mx-3`}>
+                                        All Recipes
+                                    </Link>
+                                </li>
+                            )}
+                        </ul>
+                        {showLogoutButton && (
+                            <button
+                                className="btn btn-outline-info text-light mx-4"
+                                onClick={handleLogout}
+                            >
+                                Logout
+                            </button>
+                        )}
+                    </div>
+                </div>
+            </nav>
     );
 };
 

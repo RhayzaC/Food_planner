@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { motion, useAnimation } from "framer-motion"; // Importa motion y useAnimation
 import Layout from "../Templates/Layout.templates";
 import FoodCard from "../Components/FoodCard.component";
 
@@ -39,10 +40,22 @@ const RecipesUploadView = () => {
     const goToShopList = () => {
         navigate("/recipe/shoplist", {state: { weeklyRecipes }}); // Pass weeklyRecipes as a prop to the route
     };
+    // Animación de entrada
+    const controls = useAnimation();
+
+    useEffect(() => {
+        controls.start({ opacity: 1, x: 0 }); // Inicia la animación
+    }, [controls]);
 
     return (
         <Layout>
-            <div className="container mt-5 mb-5 d-flex flex-column align-items-center">
+            <motion.div
+                className="container mt-5 mb-5 d-flex flex-column align-items-center"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.5 }} // Aumenta la duración a 1.5 segundos
+                >
                 <h1 className="text-dark text-decoration-underline mt-3">Meal Planner</h1>
                 <div className="m-3 text-dark">
                     <label>
@@ -70,21 +83,6 @@ const RecipesUploadView = () => {
                     ))}
                 </div>
                 <div className="d-flex text-center">
-                    <Link
-                        type="submit"
-                        className="mt-4 px-4 btn btn-m btn-info outline mx-2"
-                        to={"/recipe/new/"}
-                    >
-                        Create Your Recipe
-                    </Link>
-                    <Link
-                        type="submit"
-                        className="mt-4 px-4 btn btn-m btn-info outline mx-2"
-                        to={"/recipe/all/"}
-                    >
-                        All recipes                    
-                    </Link>
-
                     {/* Use onClick to call the goToShopList function */}
                     <div className="d-flex text-center">
                         <button
@@ -96,7 +94,9 @@ const RecipesUploadView = () => {
                         </button>
                     </div>
                 </div>
-            </div>
+            
+        </motion.div>
+
         </Layout>
     );
 };
