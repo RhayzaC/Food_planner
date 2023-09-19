@@ -149,7 +149,7 @@ function RecipeForm() {
                         onChange={(event, newValue) => {
                             setCurrentMeasure(newValue);
                         }}
-                        options={['cup','cups','gram','grams','spoon','spoons','teaspoon', 'teaspoons']}
+                        options={['grams', 'ml', 'tablespoons', 'teaspoons', 'units']}
                         renderInput={(params) => <TextField {...params} variant='outlined' />}
                         />
                 </div>

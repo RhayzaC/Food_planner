@@ -77,6 +77,14 @@ const RecipesUploadView = () => {
                     >
                         Create Your Recipe
                     </Link>
+                    <Link
+                        type="submit"
+                        className="mt-4 px-4 btn btn-m btn-info outline mx-2"
+                        to={"/recipe/all/"}
+                    >
+                        All recipes                    
+                    </Link>
+
                     {/* Use onClick to call the goToShopList function */}
                     <div className="d-flex text-center">
                         <button

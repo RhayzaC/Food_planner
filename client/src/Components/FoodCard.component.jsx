@@ -72,7 +72,7 @@ const FoodCardPrueba2 = (props) => {
     const renderRecipes = (category) => {
         const randomRecipe = mealTypeRecipes[category];
 
-        console.log(`Recipes for ${category}:`, randomRecipe);
+        // console.log(`Recipes for ${category}:`, randomRecipe);
         
         return (
             <div>

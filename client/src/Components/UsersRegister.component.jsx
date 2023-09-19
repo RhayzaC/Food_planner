@@ -7,7 +7,7 @@ const UserForm = ({ formType, setUser }) => {
     const [userCredentials, setUserCredentials] = useState({
         first_name: "",
         last_name: "",
-        family_members: "",
+        // family_members: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -99,7 +99,7 @@ const UserForm = ({ formType, setUser }) => {
             <>
                 {renderInput("first_name", "First Name", "Mary")}
                 {renderInput("last_name", "Last Name", "Brown")}
-                {renderInput("family_members", "Family Members", "1,2,3...")}
+                {/* {renderInput("family_members", "Family Members", "1,2,3...")} */}
             </>
             )}
                 {renderInput("email", "Email", "maryb@example.com")}

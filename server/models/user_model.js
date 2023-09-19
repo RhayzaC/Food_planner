@@ -12,10 +12,10 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: [true, "Error: last name is required"],
             },
-        family_members: {
-            type: Number,
-            required: [true, "Error: number is required"],
-            },
+        //* family_members: {
+        //     type: Number,
+        //     required: [true, "Error: number is required"],
+        //     },
         email: {
         type: String,
         unique: true,

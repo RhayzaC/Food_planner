@@ -6,10 +6,10 @@ import NewRecipe from './View/NewRecipe.view';
 import DetailRecipe from './View/DetailRecipe.view';
 import WeeklyPlan from './View/WeeklyPlan.view';
 import ShopList from './View/ShopList.view';
+import AllRecipes from './View/AllRecipes.view';
 
 import ProtectedRoute from './Components/ProtectedRoutes.component';
 import './styles.css'; 
-
 
 import "bootswatch/dist/minty/bootstrap.min.css";
 
@@ -47,6 +47,15 @@ function App() {
       </ProtectedRoute>
     }
   />
+    <Route
+    path="/recipe/all/"
+    element={
+      <ProtectedRoute user={user} redirected="/login">
+        <AllRecipes setUser={setUser} />
+      </ProtectedRoute>
+    }
+  />
+
   <Route
     path="/recipe/shoplist"
     element={
