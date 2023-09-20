@@ -10,5 +10,6 @@ export default defineConfig({
   // Changing the default build directory from `dist` to `build`
   build: {
     outDir: 'build',
+    chunkSizeWarningLimit: 1000, // Set to 1MB
   },
 })

@@ -11,7 +11,7 @@ const cookieParser = require('cookie-parser'); // to be able to read cookies
 
 // 3) Intiliazing Express instance ('app') and define auxiliar variables
 const app = express();
-const port = 8000;
+const port = process.env.PORT;
 
 // 4) Enabling settings for being able to read JSON and parse url encoded data in requests
 app.use(express.json())
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 // 5) Configuring cors in Express instace ('app')
 const corsOptions = {
   credentials: true, // Allow credentials (cookies) to be sent to/from origin
-  origin: ['http://localhost:3000', 'https://3c34-190-238-29-235.ngrok-free.app'], // Allow only this origin
+  origin: 'http://localhost:3000', // Allow only this origin
   methods: 'GET, POST, PUT, DELETE', // Allow these methods
   // allowedHeaders: 'Content-Type, Authorization', // Allow these headers
 };
