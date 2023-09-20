@@ -1,6 +1,6 @@
 # Food Planner App
 
-![Food Planner](link-to-your-app-image.png)
+![Food Planner]([link-to-your-app-image.pn](https://img.freepik.com/vector-premium/icono-menu-restaurante-negro-plato-tenedor-cuchillo-icono-cena-signo-comida-logotipo-almuerzo-vector-sobre-fondo-blanco-aislado-eps-10_399089-2834.jpg?w=2000)g)
 
 ## Descripción
 
