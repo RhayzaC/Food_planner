@@ -1,7 +1,5 @@
 # Food Planner App
 
-https://static.thenounproject.com/png/668842-200.png
-
 ## Descripción
 
 La Food Planner App es una aplicación web que te ayuda a planificar tus comidas diarias y crear una lista de compra. Puedes buscar recetas, agregar ingredientes a tu lista de compras y organizar tus comidas semanales de manera eficiente.
