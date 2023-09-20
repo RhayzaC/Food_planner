@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, Accordion, Pagination } from "react-bootstrap";
+import {baseUrl} from '../config.js';
 
 import Layout from "../Templates/Layout.templates";
 
@@ -11,7 +12,7 @@ function AllRecipes() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:8000/api/recipe")
+            .get(`${baseUrl}/api/recipe`)
             .then((response) => {
                 setRecipes(response.data);
             })

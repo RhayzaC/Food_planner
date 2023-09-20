@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import Layout from '../Templates/Layout.templates';
+import {baseUrl} from '../config.js';
 
 
 const RecipeDetailView = () => {
@@ -9,7 +10,7 @@ const RecipeDetailView = () => {
     const {id} = useParams();
 
     const getOneRecipe = () => {
-        axios.get(`http://localhost:8000/api/recipe/${id}`, {withCredentials: true})
+        axios.get(`${baseUrl}/api/recipe/${id}`, {withCredentials: true})
             .then((response) => {
                 setRecipe(response.data)
             })

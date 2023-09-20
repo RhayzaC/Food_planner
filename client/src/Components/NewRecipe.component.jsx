@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import Autocomplete from '@mui/joy/Autocomplete';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Delete } from '@mui/icons-material'; // Importa el icono "Delete" de Material Icons
+import {baseUrl} from '../config.js';
+
 
 function RecipeForm() {
     const [recipeData, setRecipeData] = useState({
@@ -71,7 +73,7 @@ function RecipeForm() {
 
         const getAllIngredients = async () => {
             try {
-                let res = await axios.get("http://localhost:8000/api/ingredients", {
+                let res = await axios.get(`${baseUrl}/api/ingredients`, {
                     withCredentials: true,
                 });
                 setAllIngredients(res.data);
@@ -88,7 +90,7 @@ function RecipeForm() {
     const createRecipe = async () => {
         try {
             let data = {...recipeData, ingredients: ingredientsList.map((elmt) => {return {...elmt, ingredient: elmt.ingredient.id}})}
-        let res = await axios.post("http://localhost:8000/api/recipe", data, {
+        let res = await axios.post(`${baseUrl}/api/recipe`, data, {
             withCredentials: true,
         });         
             navigate("/recipe/");

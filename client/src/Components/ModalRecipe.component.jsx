@@ -2,13 +2,14 @@ import { useEffect, useState } from "react"
 // import { useParams } from "react-router-dom"
 import axios from "axios"
 import { Modal, Button } from 'react-bootstrap';
+import {baseUrl} from '../config.js';
 
 const ModalRecipe = (props) => {
     const [recipe, setRecipe] = useState({});
     // const {id} = useParams();
 
     const getOneRecipe = () => {
-        axios.get(`http://localhost:8000/api/recipe/${props?.id}`, {withCredentials: true})
+        axios.get(`${baseUrl}/api/recipe/${props?.id}`, {withCredentials: true})
             .then((response) => {
                 setRecipe(response.data)
             })

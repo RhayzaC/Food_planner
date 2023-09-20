@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Card } from 'react-bootstrap';
 
 import ModalRecipe from '../Components/ModalRecipe.component';
+import {baseUrl} from '../config.js';
 
 import 'bootswatch/dist/minty/bootstrap.min.css';
 
@@ -61,7 +62,7 @@ const FoodCardPrueba2 = (props) => {
     // API Functions
     const getAllRecipes = async () => {
         try {
-            let res = await axios.get('http://localhost:8000/api/recipe/');
+            let res = await axios.get(`${baseUrl}/api/recipe/`);
             setRecipes(res.data);
         } catch (err) {
             console.log(err);
@@ -78,7 +79,7 @@ const FoodCardPrueba2 = (props) => {
             <div>
                 <p><em>{category}:</em></p>
                 {randomRecipe && (
-                    <div key={randomRecipe._id}>
+                    <div key={randomRecipe._id} className="d-flex justify-content-center">
                         <button type="button" className="btn btn-primary" onClick={() => handleShowModal(randomRecipe)}>
                             {randomRecipe.title}
                         </button>

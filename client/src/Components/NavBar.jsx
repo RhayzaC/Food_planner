@@ -4,6 +4,8 @@ import { GiMeal } from "react-icons/gi";
 import "bootswatch/dist/minty/bootstrap.min.css";
 import axios from "axios";
 
+import {baseUrl} from '../config.js';
+
 const NavBar = (props) => {
     const { setUser } = props;
     const location = useLocation();
@@ -31,7 +33,7 @@ const NavBar = (props) => {
 
     const logoutUser = async () => {
         try {
-            await axios.get("http://localhost:8000/api/users/logout", {
+            await axios.get(`${baseUrl}/api/users/logout`, {
                 withCredentials: true,
             });
             localStorage.removeItem("user");

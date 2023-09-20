@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import _ from "lodash";
+import {baseUrl} from '../config.js';
+
 
 const UserForm = ({ formType, setUser }) => {
     const [userCredentials, setUserCredentials] = useState({
@@ -38,7 +40,7 @@ const UserForm = ({ formType, setUser }) => {
     const registerUser = async () => {
         try {
         const res = await axios.post(
-            "http://localhost:8000/api/users/register",
+            `${baseUrl}/api/users/register`,
             userCredentials,
             { withCredentials: true }
         );
@@ -62,7 +64,7 @@ const UserForm = ({ formType, setUser }) => {
     const loginUser = async () => {
         try {
         const res = await axios.post(
-            "http://localhost:8000/api/users/login",
+            `${baseUrl}/api/users/login`,
             userCredentials,
             { withCredentials: true }
         );
