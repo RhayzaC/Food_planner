@@ -1,6 +1,7 @@
 # Food Planner App
 
-![Food Planner]([)
+![image](https://github.com/Cbit12/Food_planner/assets/112508115/b489ae2f-40d5-46ad-b2c9-e527285b1a19)
+
 
 ## Descripción
 
