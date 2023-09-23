@@ -56,5 +56,7 @@ Food Planner App es una aplicación web que te ayuda a planificar tus comidas di
    ```bash
    git clone https://github.com/Cbit12/food-planner.git
 
+2. Prueba nuestra app:
+ http://3.86.66.135/
 ---
 Made with ❤️ by **Carolin Bittrich y Rhayza Yépez** 
