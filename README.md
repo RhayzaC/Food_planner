@@ -15,11 +15,11 @@ Food Planner App es una aplicación web que te ayuda a planificar tus comidas di
 ## Tecnologías Utilizadas
 
 - **Lenguajes**
---- 
+  
 ![JavaScript](https://img.shields.io/badge/-JavaScript-333333?style=flat&logo=javascript)
-
-- **Frontend** & **Backend**
 ---
+- **Frontend** & **Backend**
+
 ![Vite](https://img.shields.io/badge/-Vite-333333?style=flat&logo=vite)
 ![Node.js](https://img.shields.io/badge/-Node.js-333333?style=flat&logo=node.js)
 ![MongoDB](https://img.shields.io/badge/-MongoDB-333333?style=flat&logo=MongoDB)
@@ -35,11 +35,11 @@ Food Planner App es una aplicación web que te ayuda a planificar tus comidas di
 - ![Material UI](https://img.shields.io/badge/Material--UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white)
 - ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
 - ![Express](https://img.shields.io/badge/-Express-333333?style=flat&logo=express)
-- [Framer](https://img.shields.io/badge/Framer-black?style=for-the-badge&logo=framer&logoColor=blue)
-- [Html2canvas](https://html2canvas.hertzen.com)
-  <a href="http://mdbootstrap.com/docs/react/">
+- <a href="http://mdbootstrap.com/docs/react/">
     <img width="50" src="https://mdbootstrap.com/img/Marketing/general/logo/huge/mdb-react.png">
   </a>
+- [Framer](https://img.shields.io/badge/Framer-black?style=for-the-badge&logo=framer&logoColor=blue)
+- [Html2canvas](https://html2canvas.hertzen.com)
 - [React Icons](https://react-icons.github.io/react-icons)
 - [Bootswatch](https://bootswatch.com/)
   
